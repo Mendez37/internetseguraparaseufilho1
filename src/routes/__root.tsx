@@ -77,14 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "Internet Segura para Seu Filho" },
+      { name: "description", content: "Safe Harbor Digital is a gamified funnel that educates parents on online child safety risks." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "Internet Segura para Seu Filho" },
+      { property: "og:description", content: "Safe Harbor Digital is a gamified funnel that educates parents on online child safety risks." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Internet Segura para Seu Filho" },
+      { name: "twitter:description", content: "Safe Harbor Digital is a gamified funnel that educates parents on online child safety risks." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1aed77df-1a56-49d5-bef8-0fcd7ae55891/id-preview-664f0337--7350b1dd-7b12-4ffa-8690-eaf58f9141b8.lovable.app-1780797949101.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1aed77df-1a56-49d5-bef8-0fcd7ae55891/id-preview-664f0337--7350b1dd-7b12-4ffa-8690-eaf58f9141b8.lovable.app-1780797949101.png" },
     ],
     links: [
       {
