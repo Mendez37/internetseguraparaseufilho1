@@ -335,10 +335,10 @@ function Result({ onContinue }: { onContinue: () => void }) {
     <section className="animate-fade-up">
       <div className="rounded-3xl border border-destructive/40 bg-card/60 p-8 backdrop-blur md:p-12">
         <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-destructive">
-          <ShieldAlert className="h-5 w-5" /> RELATÓRIO PERSONALIZADO
+          <ShieldAlert className="h-5 w-5" /> SUA ANÁLISE FOI CONCLUÍDA
         </div>
         <h2 className="mt-3 text-3xl font-bold md:text-4xl">
-          Nível de Segurança Digital: <span className="text-destructive text-glow-red">Atenção Necessária</span>
+          ⚠️ Sua Análise Foi Concluída...
         </h2>
 
         <div className="mt-6 rounded-2xl border border-border bg-deep/60 p-6">
@@ -351,18 +351,21 @@ function Result({ onContinue }: { onContinue: () => void }) {
           </div>
         </div>
 
-        <p className="mt-6 text-lg text-muted-foreground">
-          Com base nas suas respostas, existem <span className="font-semibold text-foreground">sinais de que seu filho pode estar exposto a riscos online</span> que passam despercebidos pela maioria dos pais.
-        </p>
-        <p className="mt-4 text-lg text-foreground">
-          A boa notícia é que isso pode ser corrigido <span className="text-neon font-semibold">rapidamente com orientação adequada</span>.
-        </p>
+        <div className="mt-6 space-y-4 text-lg text-muted-foreground">
+          <p>Com base nas suas respostas, identificamos alguns sinais que merecem atenção.</p>
+          <p>Isso não significa que seu filho esteja correndo perigo neste momento.</p>
+          <p>Mas significa que existem riscos digitais que podem passar despercebidos pela maioria dos pais.</p>
+          <p className="font-semibold text-foreground">E é exatamente assim que muitos problemas começam.</p>
+          <p>Primeiro vem a sensação de segurança.</p>
+          <p>Depois vem a surpresa.</p>
+          <p className="font-semibold text-destructive">E quando os pais descobrem o que aconteceu, geralmente já é tarde demais.</p>
+        </div>
 
         <button
           onClick={onContinue}
           className="mt-8 w-full rounded-xl bg-gradient-to-r from-neon to-primary px-8 py-5 text-lg font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.01] animate-pulse-glow"
         >
-          VER SOLUÇÃO AGORA <ChevronRight className="ml-1 inline h-5 w-5" />
+          🛡️ QUERO PROTEGER MEU FILHO AGORA <ChevronRight className="ml-1 inline h-5 w-5" />
         </button>
       </div>
     </section>
