@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Shield, Lock, AlertTriangle, ShieldAlert, Check, Star, ChevronRight, Eye, Users, Clock, Zap } from "lucide-react";
-import ebookMockup from "@/assets/ebook-mockup.png";
 import { QuizOption } from "@/components/funnel/QuizOption";
 import { ProgressBar } from "@/components/funnel/ProgressBar";
 import { Countdown } from "@/components/funnel/Countdown";
@@ -33,18 +32,19 @@ type Step =
 const QUIZ_STEPS: Step[] = ["q1","q2","q3","q4","q5","q6","q7","q8","q9"];
 
 const QUESTIONS: Record<string, { title: string; options: string[] }> = {
-  q1: { title: "Seu filho usa celular sem supervisão?", options: ["Todos os dias","Frequentemente","Às vezes","Quase nunca"] },
-  q2: { title: "Você sabe com quem ele conversa online?", options: ["Sei exatamente","Tenho uma ideia","Não tenho certeza","Não faço ideia"] },
-  q3: { title: "Seu filho possui redes sociais?", options: ["Sim, várias","Apenas algumas","Apenas uma","Não possui"] },
-  q4: { title: "Você verifica as configurações de privacidade dos aplicativos?", options: ["Sempre","Às vezes","Raramente","Nunca"] },
-  q5: { title: "Seu filho já recebeu mensagens de desconhecidos?", options: ["Sim","Talvez","Não sei","Não"] },
-  q6: { title: "Você utiliza algum tipo de controle parental?", options: ["Sim","Já tentei","Conheço mas não uso","Não uso"] },
-  q7: { title: "Como você gostaria de se sentir em relação à internet?", options: ["Tranquilo","Confiante","Seguro","No controle"] },
-  q8: { title: "O que seria mais importante para você?", options: ["Evitar perigos","Proteger a privacidade","Controlar o tempo de tela","Tudo isso"] },
-  q9: { title: "Você gostaria de aprender estratégias simples para proteger seus filhos?", options: ["Com certeza","Sim","Talvez","Preciso conhecer"] },
+  q1: { title: "Seu filho usa celular sem supervisão?", options: ["📱 Todos os dias","⏰ Frequentemente","👀 Às vezes","🛡️ Quase nunca"] },
+  q2: { title: "Você sabe com quem ele conversa online?", options: ["✅ Sei exatamente","🤔 Tenho uma ideia","⚠️ Não tenho certeza","🚨 Não faço ideia"] },
+  q3: { title: "Seu filho possui redes sociais?", options: ["📲 Sim, várias","👥 Apenas algumas","🔎 Apenas uma","🛡️ Não possui"] },
+  q4: { title: "Você verifica as configurações de privacidade dos aplicativos?", options: ["🔐 Sempre","👀 Às vezes","⚠️ Raramente","🚫 Nunca"] },
+  q5: { title: "Seu filho já recebeu mensagens de desconhecidos?", options: ["🚨 Sim","🤔 Talvez","⚠️ Não sei","✅ Não"] },
+  q6: { title: "Você utiliza algum tipo de controle parental?", options: ["🛡️ Sim","🔧 Já tentei","📘 Conheço mas não uso","🚫 Não uso"] },
+  q7: { title: "Como você gostaria de se sentir em relação à internet?", options: ["😌 Tranquilo","💪 Confiante","🛡️ Seguro","🎯 No controle"] },
+  q8: { title: "O que seria mais importante para você?", options: ["🚨 Evitar perigos","🔐 Proteger a privacidade","⏳ Controlar o tempo de tela","✅ Tudo isso"] },
+  q9: { title: "Você gostaria de aprender estratégias simples para proteger seus filhos?", options: ["🛡️ Com certeza","✅ Sim","🤔 Talvez","📘 Preciso conhecer"] },
 };
 
 const CHECKOUT_URL = "https://pay.kirvano.com/ccf64799-e255-4be5-baf8-8c79f6196ce8";
+const PRODUCT_MOCKUP_URL = "/__l5e/assets-v1/4cc41eae-daa7-43af-b33f-149bacd357fe/guia-internet-segura-mockup.png";
 
 function Funnel() {
   const [step, setStep] = useState<Step>("intro");
