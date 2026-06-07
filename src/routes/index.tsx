@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Shield, Lock, AlertTriangle, ShieldAlert, Check, Star, ChevronRight, Eye, Users, Clock, Zap } from "lucide-react";
-import ebookMockup from "@/assets/ebook-mockup.png";
 import { QuizOption } from "@/components/funnel/QuizOption";
 import { ProgressBar } from "@/components/funnel/ProgressBar";
 import { Countdown } from "@/components/funnel/Countdown";
@@ -33,18 +32,19 @@ type Step =
 const QUIZ_STEPS: Step[] = ["q1","q2","q3","q4","q5","q6","q7","q8","q9"];
 
 const QUESTIONS: Record<string, { title: string; options: string[] }> = {
-  q1: { title: "Seu filho usa celular sem supervisão?", options: ["Todos os dias","Frequentemente","Às vezes","Quase nunca"] },
-  q2: { title: "Você sabe com quem ele conversa online?", options: ["Sei exatamente","Tenho uma ideia","Não tenho certeza","Não faço ideia"] },
-  q3: { title: "Seu filho possui redes sociais?", options: ["Sim, várias","Apenas algumas","Apenas uma","Não possui"] },
-  q4: { title: "Você verifica as configurações de privacidade dos aplicativos?", options: ["Sempre","Às vezes","Raramente","Nunca"] },
-  q5: { title: "Seu filho já recebeu mensagens de desconhecidos?", options: ["Sim","Talvez","Não sei","Não"] },
-  q6: { title: "Você utiliza algum tipo de controle parental?", options: ["Sim","Já tentei","Conheço mas não uso","Não uso"] },
-  q7: { title: "Como você gostaria de se sentir em relação à internet?", options: ["Tranquilo","Confiante","Seguro","No controle"] },
-  q8: { title: "O que seria mais importante para você?", options: ["Evitar perigos","Proteger a privacidade","Controlar o tempo de tela","Tudo isso"] },
-  q9: { title: "Você gostaria de aprender estratégias simples para proteger seus filhos?", options: ["Com certeza","Sim","Talvez","Preciso conhecer"] },
+  q1: { title: "Seu filho usa celular sem supervisão?", options: ["📱 Todos os dias","⏰ Frequentemente","👀 Às vezes","🛡️ Quase nunca"] },
+  q2: { title: "Você sabe com quem ele conversa online?", options: ["✅ Sei exatamente","🤔 Tenho uma ideia","⚠️ Não tenho certeza","🚨 Não faço ideia"] },
+  q3: { title: "Seu filho possui redes sociais?", options: ["📲 Sim, várias","👥 Apenas algumas","🔎 Apenas uma","🛡️ Não possui"] },
+  q4: { title: "Você verifica as configurações de privacidade dos aplicativos?", options: ["🔐 Sempre","👀 Às vezes","⚠️ Raramente","🚫 Nunca"] },
+  q5: { title: "Seu filho já recebeu mensagens de desconhecidos?", options: ["🚨 Sim","🤔 Talvez","⚠️ Não sei","✅ Não"] },
+  q6: { title: "Você utiliza algum tipo de controle parental?", options: ["🛡️ Sim","🔧 Já tentei","📘 Conheço mas não uso","🚫 Não uso"] },
+  q7: { title: "Como você gostaria de se sentir em relação à internet?", options: ["😌 Tranquilo","💪 Confiante","🛡️ Seguro","🎯 No controle"] },
+  q8: { title: "O que seria mais importante para você?", options: ["🚨 Evitar perigos","🔐 Proteger a privacidade","⏳ Controlar o tempo de tela","✅ Tudo isso"] },
+  q9: { title: "Você gostaria de aprender estratégias simples para proteger seus filhos?", options: ["🛡️ Com certeza","✅ Sim","🤔 Talvez","📘 Preciso conhecer"] },
 };
 
 const CHECKOUT_URL = "https://pay.kirvano.com/ccf64799-e255-4be5-baf8-8c79f6196ce8";
+const PRODUCT_MOCKUP_URL = "/__l5e/assets-v1/4cc41eae-daa7-43af-b33f-149bacd357fe/guia-internet-segura-mockup.png";
 
 function Funnel() {
   const [step, setStep] = useState<Step>("intro");
@@ -286,15 +286,15 @@ function LoadingResult({ onDone }: { onDone: () => void }) {
   }, []);
 
   useEffect(() => {
-    if (pct >= 25 && done < 1) setDone(1);
-    if (pct >= 55 && done < 2) setDone(2);
-    if (pct >= 85 && done < 3) setDone(3);
-    if (pct >= 100 && done < 4) {
+    if (pct >= 100) {
       setDone(4);
-      const t = setTimeout(onDone, 700);
-      return () => clearTimeout(t);
+      const t = window.setTimeout(onDone, 700);
+      return () => window.clearTimeout(t);
     }
-  }, [pct, done, onDone]);
+    if (pct >= 85) setDone(3);
+    else if (pct >= 55) setDone(2);
+    else if (pct >= 25) setDone(1);
+  }, [pct, onDone]);
 
   return (
     <section className="animate-fade-up text-center">
@@ -335,10 +335,10 @@ function Result({ onContinue }: { onContinue: () => void }) {
     <section className="animate-fade-up">
       <div className="rounded-3xl border border-destructive/40 bg-card/60 p-8 backdrop-blur md:p-12">
         <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-destructive">
-          <ShieldAlert className="h-5 w-5" /> RELATÓRIO PERSONALIZADO
+          <ShieldAlert className="h-5 w-5" /> SUA ANÁLISE FOI CONCLUÍDA
         </div>
         <h2 className="mt-3 text-3xl font-bold md:text-4xl">
-          Nível de Segurança Digital: <span className="text-destructive text-glow-red">Atenção Necessária</span>
+          ⚠️ Sua Análise Foi Concluída...
         </h2>
 
         <div className="mt-6 rounded-2xl border border-border bg-deep/60 p-6">
@@ -351,18 +351,21 @@ function Result({ onContinue }: { onContinue: () => void }) {
           </div>
         </div>
 
-        <p className="mt-6 text-lg text-muted-foreground">
-          Com base nas suas respostas, existem <span className="font-semibold text-foreground">sinais de que seu filho pode estar exposto a riscos online</span> que passam despercebidos pela maioria dos pais.
-        </p>
-        <p className="mt-4 text-lg text-foreground">
-          A boa notícia é que isso pode ser corrigido <span className="text-neon font-semibold">rapidamente com orientação adequada</span>.
-        </p>
+        <div className="mt-6 space-y-4 text-lg text-muted-foreground">
+          <p>Com base nas suas respostas, identificamos alguns sinais que merecem atenção.</p>
+          <p>Isso não significa que seu filho esteja correndo perigo neste momento.</p>
+          <p>Mas significa que existem riscos digitais que podem passar despercebidos pela maioria dos pais.</p>
+          <p className="font-semibold text-foreground">E é exatamente assim que muitos problemas começam.</p>
+          <p>Primeiro vem a sensação de segurança.</p>
+          <p>Depois vem a surpresa.</p>
+          <p className="font-semibold text-destructive">E quando os pais descobrem o que aconteceu, geralmente já é tarde demais.</p>
+        </div>
 
         <button
           onClick={onContinue}
           className="mt-8 w-full rounded-xl bg-gradient-to-r from-neon to-primary px-8 py-5 text-lg font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.01] animate-pulse-glow"
         >
-          VER SOLUÇÃO AGORA <ChevronRight className="ml-1 inline h-5 w-5" />
+          🛡️ QUERO PROTEGER MEU FILHO AGORA <ChevronRight className="ml-1 inline h-5 w-5" />
         </button>
       </div>
     </section>
@@ -371,55 +374,170 @@ function Result({ onContinue }: { onContinue: () => void }) {
 
 /* ---------- SALES ---------- */
 function Sales() {
+  const risks = [
+    "🚨 Perfis falsos",
+    "🚨 Conversas aparentemente inocentes",
+    "🚨 Jogos online com desconhecidos",
+    "🚨 Vídeos impróprios sugeridos por algoritmos",
+    "🚨 Cyberbullying",
+    "🚨 Golpes digitais",
+    "🚨 Exposição excessiva da vida pessoal",
+  ];
+
+  const learnings = [
+    "Como identificar comportamentos que podem indicar problemas online",
+    "Como conversar sobre segurança digital sem criar conflitos",
+    "Como proteger a privacidade dos seus filhos",
+    "Como reduzir riscos em redes sociais",
+    "Como evitar golpes e contatos perigosos",
+    "Como criar regras digitais saudáveis dentro de casa",
+    "Como agir antes que o problema aconteça",
+  ];
+
+  const bonuses = [
+    { title: "📘 Guia Internet Segura Para Seus Filhos", value: "R$97", text: "O material principal com orientações práticas para proteger seus filhos dos riscos digitais." },
+    { title: "🚨 Checklist: 50 Sinais de Alerta", value: "R$27", text: "Descubra comportamentos que podem indicar exposição a riscos online antes que se tornem um problema sério." },
+    { title: "💬 Roteiro de Conversa com Seu Filho", value: "R$19", text: "Saiba exatamente o que dizer para abordar segurança digital sem discussões ou resistência." },
+    { title: "📱 Guia por Aplicativo", value: "R$37", text: "Aprenda os principais riscos e cuidados em TikTok, Roblox, Instagram, WhatsApp, YouTube, Discord e outros aplicativos populares." },
+  ];
+
+  const testimonials = [
+    { text: "Eu achava que meu filho estava seguro porque ficava dentro de casa. Esse guia me mostrou riscos que eu nunca tinha imaginado.", name: "Patrícia M." },
+    { text: "Leitura obrigatória para qualquer pai. Simples, prática e extremamente útil.", name: "Rodrigo A." },
+    { text: "Depois do guia conversei com minha filha e descobri situações que ela nunca tinha comentado comigo.", name: "Fernanda S." },
+  ];
+
+  const advantages = [
+    "Linguagem simples",
+    "Aplicação imediata",
+    "Acesso vitalício",
+    "Atualizações futuras",
+    "Funciona para qualquer nível de conhecimento",
+    "Pode ser lido em poucas horas",
+    "Ajuda a prevenir problemas antes que aconteçam",
+  ];
+
   return (
     <article className="animate-fade-up pb-32 md:pb-12">
-      <div className="text-center">
+      <header className="text-center">
         <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-destructive/40 bg-destructive/10 px-4 py-1.5 text-xs font-bold tracking-widest text-destructive">
           <AlertTriangle className="h-3.5 w-3.5" /> LEITURA URGENTE
         </div>
         <h1 className="mx-auto mt-5 max-w-3xl text-4xl font-bold leading-[1.05] md:text-6xl">
-          ⚠️ O Guia Que Todo Pai e Toda Mãe{" "}
-          <span className="text-neon text-glow-blue">Deveriam Ler</span>{" "}
-          Antes Que Seja Tarde
+          O Guia Que Está Ajudando Pais a Protegerem Seus Filhos dos{" "}
+          <span className="text-neon text-glow-blue">Perigos Ocultos da Internet</span>{" "}
+          Antes Que Algo Grave Aconteça
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground md:text-xl">
-          Descubra como proteger seus filhos contra golpes, cyberbullying, conteúdos impróprios, predadores online e riscos digitais que a maioria dos pais desconhece.
+          Descubra como identificar ameaças digitais, evitar exposição a conteúdos inadequados e proteger seus filhos mesmo que você não entenda nada de tecnologia.
         </p>
-      </div>
+
+        <div className="mx-auto mt-7 max-w-2xl rounded-2xl border border-destructive/60 bg-destructive px-5 py-4 glow-red">
+          <p className="text-base font-bold leading-snug text-destructive-foreground md:text-xl">
+            A maioria dos pais só descobre o perigo depois que algo acontece. Descubra como evitar isso hoje.
+          </p>
+        </div>
+      </header>
 
       {/* MOCKUP */}
-      <div className="relative mx-auto mt-10 flex max-w-md justify-center">
+      <div className="relative mx-auto mt-8 flex max-w-2xl justify-center">
         <div className="absolute inset-0 rounded-full bg-neon/30 blur-3xl" />
         <img
-          src={ebookMockup}
+          src={PRODUCT_MOCKUP_URL}
           alt="Guia Internet Segura Para Seus Filhos - Capa do ebook"
-          width={1024}
-          height={1024}
+          width={2000}
+          height={2000}
           loading="lazy"
-          className="relative w-full max-w-xs animate-float drop-shadow-[0_0_40px_rgba(0,184,255,0.4)] md:max-w-sm"
+          className="relative w-full max-w-md animate-float drop-shadow-[0_0_45px_rgba(0,184,255,0.45)] md:max-w-xl"
         />
       </div>
 
-      {/* ALERT BOX */}
-      <div className="mx-auto mt-12 max-w-2xl rounded-2xl border border-destructive/50 bg-destructive/10 p-6 glow-red">
-        <p className="text-center text-lg font-semibold text-foreground md:text-xl">
-          🚨 Seu filho pode estar a apenas <span className="text-destructive">um clique</span> de um problema que poderia ter sido evitado.
-        </p>
+      <div className="mt-8 flex justify-center">
+        <a
+          href={CHECKOUT_URL}
+          className="inline-flex w-full max-w-md items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-8 py-5 text-base font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:text-lg"
+        >
+          🛡️ QUERO PROTEGER MEU FILHO AGORA
+          <ChevronRight className="ml-2 h-5 w-5" />
+        </a>
       </div>
+
+      <section className="mt-16 space-y-5 text-lg leading-relaxed text-muted-foreground md:text-xl">
+        <p className="text-foreground">Se você chegou até aqui...</p>
+        <p>Provavelmente existe uma preocupação que passa pela sua cabeça de vez em quando.</p>
+        <p className="rounded-2xl border border-neon/40 bg-neon/10 p-5 text-center font-semibold text-foreground glow-blue">
+          “Será que meu filho está realmente seguro quando está online?”
+        </p>
+        <p>A verdade é que nenhuma mãe ou pai consegue vigiar uma tela 24 horas por dia.</p>
+        <p>E não é por falta de cuidado.</p>
+        <p>É porque os perigos digitais evoluíram muito mais rápido do que a maioria das famílias consegue acompanhar.</p>
+        <div className="grid gap-3 text-foreground md:grid-cols-3">
+          <p className="rounded-xl border border-border bg-card/50 p-4">Enquanto você trabalha...</p>
+          <p className="rounded-xl border border-border bg-card/50 p-4">Enquanto está preparando o jantar...</p>
+          <p className="rounded-xl border border-border bg-card/50 p-4">Enquanto está dormindo...</p>
+        </div>
+        <p className="font-semibold text-destructive">Seu filho pode estar navegando por ambientes que você nem imagina.</p>
+      </section>
+
+      <section className="mt-16 rounded-3xl border border-destructive/40 bg-card/60 p-7 backdrop-blur md:p-10">
+        <h2 className="text-3xl font-bold md:text-4xl">O perigo nem sempre parece perigo</h2>
+        <div className="mt-6 space-y-4 text-lg text-muted-foreground">
+          <p>O maior erro dos pais hoje não é deixar o filho usar a internet.</p>
+          <p>O erro é acreditar que o perigo é óbvio.</p>
+          <p className="text-2xl font-bold text-foreground">Não é.</p>
+          <p>Os maiores riscos geralmente chegam disfarçados.</p>
+        </div>
+        <ul className="mt-6 grid gap-3">
+          {risks.map((risk) => (
+            <li key={risk} className="rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 font-semibold text-foreground">
+              {risk}
+            </li>
+          ))}
+        </ul>
+        <div className="mt-6 space-y-4 text-lg text-muted-foreground">
+          <p>Muitos pais acreditam que seus filhos saberiam identificar um problema.</p>
+          <p>Mas crianças e adolescentes ainda estão aprendendo a reconhecer riscos.</p>
+          <p className="font-semibold text-foreground">É por isso que precisam de orientação.</p>
+        </div>
+      </section>
+
+      <section className="mt-16 text-center">
+        <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border-2 border-destructive bg-destructive/10 animate-pulse-red">
+          <AlertTriangle className="h-10 w-10 text-destructive" />
+        </div>
+        <h2 className="mt-6 text-3xl font-black leading-tight text-destructive text-glow-red md:text-5xl">Imagine receber uma ligação da escola...</h2>
+        <div className="mx-auto mt-7 max-w-2xl space-y-4 text-lg text-muted-foreground md:text-xl">
+          <p>Seu filho sofreu cyberbullying.</p>
+          <p>Ou descobrir que ele passou meses conversando com alguém que fingia ser outra criança.</p>
+          <p>Ou perceber que conteúdos impróprios influenciaram comportamentos que você não consegue entender.</p>
+          <p className="font-bold text-foreground">Nenhum pai acredita que isso vai acontecer com sua família.</p>
+          <p className="font-bold text-destructive">Até acontecer.</p>
+        </div>
+      </section>
+
+      <section className="mt-16 rounded-3xl border border-neon/40 bg-gradient-to-b from-card/80 to-deep/80 p-7 backdrop-blur glow-blue md:p-10">
+        <h2 className="text-center text-3xl font-bold md:text-4xl">A boa notícia</h2>
+        <div className="mt-6 grid gap-3 text-lg text-foreground md:grid-cols-4">
+          <p className="rounded-xl border border-border bg-card/60 p-4">Você não precisa se tornar especialista em tecnologia.</p>
+          <p className="rounded-xl border border-border bg-card/60 p-4">Você só precisa aprender o que observar.</p>
+          <p className="rounded-xl border border-border bg-card/60 p-4">O que configurar.</p>
+          <p className="rounded-xl border border-border bg-card/60 p-4">Quais sinais nunca ignorar.</p>
+        </div>
+        <p className="mt-7 text-center text-lg text-muted-foreground">Foi exatamente para isso que criamos o:</p>
+        <h2 className="mt-3 text-center text-3xl font-black uppercase text-neon text-glow-blue md:text-5xl">
+          Guia Internet Segura Para Seus Filhos
+        </h2>
+        <p className="mx-auto mt-5 max-w-2xl text-center text-lg text-muted-foreground">
+          Um material direto ao ponto que mostra como proteger seus filhos dos principais perigos da internet moderna.
+        </p>
+      </section>
 
       {/* BENEFITS */}
       <section className="mt-14">
         <h2 className="text-center text-3xl font-bold md:text-4xl">O Que Você Vai Aprender</h2>
+        <p className="mt-3 text-center text-lg text-muted-foreground">Ao acessar o guia você descobrirá:</p>
         <ul className="mx-auto mt-8 grid max-w-2xl gap-3">
-          {[
-            "Aprenda a identificar sinais de perigo",
-            "Proteja seu filho contra pessoas mal-intencionadas",
-            "Evite exposição a conteúdos inadequados",
-            "Entenda como funcionam os principais riscos digitais",
-            "Aprenda a conversar sobre internet sem conflitos",
-            "Crie hábitos digitais saudáveis",
-            "Mais tranquilidade para toda a família",
-          ].map((b) => (
+          {learnings.map((b) => (
             <li key={b} className="flex items-start gap-3 rounded-xl border border-border bg-card/50 p-4 backdrop-blur">
               <div className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-neon/20">
                 <Check className="h-4 w-4 text-neon" />
@@ -430,18 +548,65 @@ function Sales() {
         </ul>
       </section>
 
+      <section className="mt-16 grid gap-6 md:grid-cols-2">
+        <div className="rounded-3xl border border-border bg-card/60 p-7 backdrop-blur">
+          <h2 className="text-2xl font-bold md:text-3xl">Por que este guia é diferente</h2>
+          <div className="mt-5 space-y-3 text-lg text-muted-foreground">
+            <p>A maioria dos conteúdos sobre segurança digital é complicada.</p>
+            <p>Cheia de termos técnicos.</p>
+            <p>Difícil de aplicar.</p>
+            <p className="font-semibold text-foreground">Este guia foi criado para pais comuns.</p>
+          </div>
+        </div>
+        <div className="rounded-3xl border border-neon/40 bg-neon/10 p-7 backdrop-blur">
+          <h2 className="text-2xl font-bold md:text-3xl">Orientações simples</h2>
+          <div className="mt-5 space-y-3 text-lg text-muted-foreground">
+            <p>Você recebe orientações simples.</p>
+            <p>Objetivas.</p>
+            <p>Práticas.</p>
+            <p className="font-semibold text-foreground">Mesmo que você não tenha conhecimento técnico.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="mt-16">
+        <h2 className="text-center text-3xl font-bold md:text-4xl">Como Funciona</h2>
+        <div className="mt-8 grid gap-4 md:grid-cols-4">
+          {[
+            ["PASSO 1", "Acesse o material imediatamente após a compra."],
+            ["PASSO 2", "Aprenda os riscos digitais que mais afetam crianças e adolescentes atualmente."],
+            ["PASSO 3", "Implemente as orientações práticas com sua família."],
+            ["PASSO 4", "Tenha muito mais tranquilidade sabendo que está preparado para proteger quem você mais ama."],
+          ].map(([stepTitle, text]) => (
+            <div key={stepTitle} className="rounded-2xl border border-border bg-card/60 p-5 backdrop-blur">
+              <p className="text-sm font-bold tracking-widest text-neon">{stepTitle}</p>
+              <p className="mt-3 text-foreground">{text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-16">
+        <h2 className="text-center text-3xl font-bold md:text-4xl">Você Recebe Hoje</h2>
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
+          {bonuses.map((item) => (
+            <div key={item.title} className="rounded-2xl border border-border bg-card/60 p-5 backdrop-blur">
+              <h3 className="text-xl font-bold text-foreground">{item.title}</h3>
+              <p className="mt-2 text-sm font-bold text-neon">Valor: {item.value}</p>
+              <p className="mt-3 text-muted-foreground">{item.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* SOCIAL PROOF */}
       <section className="mt-16">
         <h2 className="text-center text-3xl font-bold md:text-4xl">Pais que já protegeram seus filhos</h2>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
-          {[
-            { stars: 5, text: "Abriu meus olhos para coisas que eu nunca tinha percebido.", name: "Mariana C." },
-            { stars: 5, text: "Depois desse guia, configurei a segurança dos celulares dos meus filhos.", name: "Ricardo M." },
-            { stars: 5, text: "Leitura obrigatória para qualquer pai.", name: "Patrícia L." },
-          ].map((r) => (
+          {testimonials.map((r) => (
             <div key={r.name} className="rounded-2xl border border-border bg-card/60 p-5 backdrop-blur">
               <div className="flex gap-0.5 text-neon">
-                {Array.from({ length: r.stars }).map((_, i) => (
+                {Array.from({ length: 5 }).map((_, i) => (
                   <Star key={i} className="h-4 w-4 fill-neon" />
                 ))}
               </div>
@@ -452,6 +617,18 @@ function Sales() {
         </div>
       </section>
 
+      <section className="mt-16">
+        <h2 className="text-center text-3xl font-bold md:text-4xl">Vantagens</h2>
+        <ul className="mx-auto mt-8 grid max-w-2xl gap-3 md:grid-cols-2">
+          {advantages.map((advantage) => (
+            <li key={advantage} className="flex items-center gap-3 rounded-xl border border-border bg-card/50 p-4 backdrop-blur">
+              <Check className="h-5 w-5 flex-shrink-0 text-neon" />
+              <span className="font-medium text-foreground">{advantage}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
       {/* OFFER */}
       <section className="mt-16 rounded-3xl border border-neon/40 bg-gradient-to-b from-card/80 to-deep/80 p-8 backdrop-blur md:p-12 glow-blue">
         <div className="text-center">
@@ -460,8 +637,17 @@ function Sales() {
           </div>
           <h2 className="mt-5 text-3xl font-bold md:text-4xl">Acesso Imediato ao Guia Completo</h2>
 
+          <div className="mx-auto mt-7 max-w-md space-y-2 rounded-2xl border border-border bg-card/60 p-5 text-left text-muted-foreground">
+            <p>Hoje você não vai pagar:</p>
+            <p><span className="line-through">R$97</span> pelo guia</p>
+            <p><span className="line-through">R$27</span> pelo checklist</p>
+            <p><span className="line-through">R$19</span> pelo roteiro</p>
+            <p><span className="line-through">R$37</span> pelo guia de aplicativos</p>
+            <p className="pt-2 text-center text-lg font-bold text-foreground">Total: <span className="line-through text-destructive">R$180</span></p>
+          </div>
+
           <div className="mx-auto mt-8 flex max-w-sm flex-col items-center">
-            <div className="text-sm text-muted-foreground">De <span className="line-through">R$ 97,00</span> por apenas:</div>
+            <div className="text-sm text-muted-foreground">Por apenas:</div>
             <div className="mt-2 flex items-baseline gap-2">
               <span className="text-2xl font-bold text-muted-foreground">R$</span>
               <span className="font-display text-7xl font-black text-neon text-glow-blue">37</span>
@@ -474,14 +660,14 @@ function Sales() {
             <Countdown minutes={15} />
           </div>
           <p className="mt-3 text-sm text-muted-foreground">
-            ⚠️ Desconto promocional disponível apenas hoje. Quando o contador zerar, o valor poderá voltar para R$97.
+            ⚠️ Esta condição promocional foi liberada por tempo limitado. Quando a promoção encerrar, o valor poderá retornar para R$97.
           </p>
 
           <a
             href={CHECKOUT_URL}
             className="mt-8 inline-flex w-full max-w-md items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-8 py-5 text-base font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:text-lg"
           >
-            QUERO PROTEGER MEU FILHO AGORA
+            🛡️ QUERO PROTEGER MEU FILHO AGORA
             <ChevronRight className="ml-2 h-5 w-5" />
           </a>
 
@@ -496,13 +682,46 @@ function Sales() {
         </div>
       </section>
 
+      <section className="mt-16 rounded-3xl border border-border bg-card/60 p-7 backdrop-blur md:p-10">
+        <h2 className="text-center text-3xl font-bold md:text-4xl">Perguntas Frequentes</h2>
+        <div className="mt-8 grid gap-4">
+          {[
+            ["Preciso entender de tecnologia?", "Não. O guia foi criado para pais comuns."],
+            ["Meu filho ainda é pequeno. Vale a pena?", "Sim. Quanto mais cedo você criar hábitos digitais saudáveis, melhor."],
+            ["Recebo o acesso na hora?", "Sim. O acesso é imediato após a confirmação do pagamento."],
+            ["Funciona para adolescentes?", "Sim. O conteúdo foi desenvolvido para pais de crianças e adolescentes."],
+            ["O pagamento é único?", "Sim. Sem mensalidades ou cobranças recorrentes."],
+          ].map(([question, answer]) => (
+            <div key={question} className="border-b border-border pb-4 last:border-b-0 last:pb-0">
+              <h3 className="font-bold text-foreground">{question}</h3>
+              <p className="mt-1 text-muted-foreground">{answer}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-16 text-center">
+        <h2 className="text-3xl font-bold md:text-4xl">A melhor proteção sempre será a prevenção.</h2>
+        <div className="mx-auto mt-5 max-w-2xl space-y-4 text-lg text-muted-foreground">
+          <p>Seu filho não precisa passar por uma situação perigosa para que você comece a agir.</p>
+          <p>Quanto mais cedo você aprender a identificar os riscos, maiores são as chances de evitar problemas que podem impactar sua família por anos.</p>
+        </div>
+        <a
+          href={CHECKOUT_URL}
+          className="mt-8 inline-flex w-full max-w-md items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-8 py-5 text-base font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:text-lg"
+        >
+          🛡️ QUERO PROTEGER MEU FILHO AGORA POR R$37
+          <ChevronRight className="ml-2 h-5 w-5" />
+        </a>
+      </section>
+
       {/* STICKY MOBILE CTA */}
       <div className="fixed inset-x-0 bottom-0 z-50 border-t border-neon/30 bg-deep/95 p-3 backdrop-blur md:hidden">
         <a
           href={CHECKOUT_URL}
           className="flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-6 py-4 text-sm font-bold uppercase tracking-wide text-primary-foreground glow-blue"
         >
-          PROTEGER MEU FILHO · R$37
+          🛡️ PROTEGER MEU FILHO · R$37
           <ChevronRight className="ml-1 h-4 w-4" />
         </a>
       </div>
