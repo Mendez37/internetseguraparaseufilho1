@@ -286,15 +286,15 @@ function LoadingResult({ onDone }: { onDone: () => void }) {
   }, []);
 
   useEffect(() => {
-    if (pct >= 25 && done < 1) setDone(1);
-    if (pct >= 55 && done < 2) setDone(2);
-    if (pct >= 85 && done < 3) setDone(3);
-    if (pct >= 100 && done < 4) {
+    if (pct >= 100) {
       setDone(4);
-      const t = setTimeout(onDone, 700);
-      return () => clearTimeout(t);
+      const t = window.setTimeout(onDone, 700);
+      return () => window.clearTimeout(t);
     }
-  }, [pct, done, onDone]);
+    if (pct >= 85) setDone(3);
+    else if (pct >= 55) setDone(2);
+    else if (pct >= 25) setDone(1);
+  }, [pct, onDone]);
 
   return (
     <section className="animate-fade-up text-center">
