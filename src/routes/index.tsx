@@ -514,13 +514,22 @@ function Sales() {
         <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border-2 border-destructive bg-destructive/10 animate-pulse-red">
           <AlertTriangle className="h-10 w-10 text-destructive" />
         </div>
-        <h2 className="mt-6 text-3xl font-black leading-tight text-destructive text-glow-red md:text-5xl">Imagine receber uma ligação da escola...</h2>
-        <div className="mx-auto mt-7 max-w-2xl space-y-4 text-lg text-muted-foreground md:text-xl">
+        <h2 className="mt-6 text-2xl font-black leading-tight text-destructive text-glow-red md:text-5xl">Imagine receber uma ligação da escola...</h2>
+        <div className="mx-auto mt-7 max-w-2xl space-y-4 text-base text-muted-foreground md:text-xl">
           <p>Seu filho sofreu cyberbullying.</p>
           <p>Ou descobrir que ele passou meses conversando com alguém que fingia ser outra criança.</p>
           <p>Ou perceber que conteúdos impróprios influenciaram comportamentos que você não consegue entender.</p>
           <p className="font-bold text-foreground">Nenhum pai acredita que isso vai acontecer com sua família.</p>
           <p className="font-bold text-destructive">Até acontecer.</p>
+        </div>
+        <div className="mt-8 flex justify-center px-1">
+          <a
+            href={CHECKOUT_URL}
+            className="inline-flex w-full max-w-md items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-5 py-6 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
+          >
+            🛡️ QUERO PROTEGER MEU FILHO AGORA
+            <ChevronRight className="ml-2 h-5 w-5" />
+          </a>
         </div>
       </section>
 
