@@ -14,7 +14,7 @@ export function QuizOption({
       onClick={onClick}
       className={cn(
         "group w-full text-left rounded-xl border border-border bg-card/60 backdrop-blur",
-        "px-5 py-4 text-base md:text-lg font-medium text-foreground",
+        "px-5 py-5 text-base md:text-lg font-medium text-foreground min-h-[56px]",
         "transition-all duration-200 hover:border-neon hover:bg-card hover:-translate-y-0.5 hover:glow-blue",
         "active:scale-[0.98] animate-fade-up"
       )}

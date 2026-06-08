@@ -124,7 +124,7 @@ function Intro({ onStart }: { onStart: () => void }) {
         ALERTA DE SEGURANÇA DIGITAL
       </div>
 
-      <h1 className="mt-6 text-center text-4xl font-bold leading-[1.05] md:text-6xl">
+      <h1 className="mt-6 text-center text-3xl font-bold leading-[1.05] md:text-6xl">
         Você Sabe o Que Seu Filho{" "}
         <span className="text-neon text-glow-blue">Faz na Internet</span>{" "}
         Quando Você Não Está Olhando?
@@ -151,7 +151,7 @@ function Intro({ onStart }: { onStart: () => void }) {
       <div className="mt-10 flex flex-col items-center gap-4">
         <button
           onClick={onStart}
-          className="group relative w-full max-w-md rounded-xl bg-gradient-to-r from-neon to-primary px-8 py-5 text-base font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.98] animate-pulse-glow md:text-lg"
+          className="group relative w-full max-w-md rounded-xl bg-gradient-to-r from-neon to-primary px-6 py-6 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.98] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
         >
           QUERO DESCOBRIR AGORA
           <ChevronRight className="ml-2 inline h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -220,11 +220,11 @@ function Break({
       }`}>
         {badge}
       </div>
-      <h2 className="mx-auto mt-5 max-w-2xl text-3xl font-bold leading-tight md:text-5xl">{title}</h2>
-      <p className="mx-auto mt-5 max-w-xl text-lg text-muted-foreground">{body}</p>
+      <h2 className="mx-auto mt-5 max-w-2xl text-2xl font-bold leading-tight md:text-5xl">{title}</h2>
+      <p className="mx-auto mt-5 max-w-xl text-base text-muted-foreground md:text-lg">{body}</p>
       <button
         onClick={onContinue}
-        className="mt-10 rounded-xl bg-gradient-to-r from-neon to-primary px-10 py-4 font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow"
+        className="mt-10 w-full max-w-sm rounded-xl bg-gradient-to-r from-neon to-primary px-6 py-5 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:w-auto md:px-10 md:py-4 md:text-base"
       >
         {cta} <ChevronRight className="ml-1 inline h-5 w-5" />
       </button>
@@ -239,10 +239,10 @@ function BreakShock({ onContinue }: { onContinue: () => void }) {
       <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border-2 border-destructive bg-destructive/10 animate-pulse-red">
         <AlertTriangle className="h-10 w-10 text-destructive" />
       </div>
-      <h2 className="mt-6 text-5xl font-black leading-none tracking-tight text-destructive text-glow-red md:text-7xl">
+      <h2 className="mt-6 text-4xl font-black leading-none tracking-tight text-destructive text-glow-red md:text-7xl">
         🚨 ATENÇÃO
       </h2>
-      <p className="mx-auto mt-6 max-w-xl text-xl font-semibold text-foreground md:text-2xl">
+      <p className="mx-auto mt-6 max-w-xl text-lg font-semibold text-foreground md:text-2xl">
         Seu filho pode estar em perigo neste exato momento.
       </p>
       <div className="mx-auto mt-8 max-w-xl space-y-4 text-left text-base text-muted-foreground md:text-lg">
@@ -256,7 +256,7 @@ function BreakShock({ onContinue }: { onContinue: () => void }) {
       </div>
       <button
         onClick={onContinue}
-        className="mt-10 rounded-xl bg-destructive px-8 py-4 font-bold uppercase tracking-wide text-destructive-foreground transition-transform hover:scale-[1.02] glow-red"
+        className="mt-10 w-full max-w-sm rounded-xl bg-destructive px-6 py-5 text-sm font-bold uppercase tracking-wide text-destructive-foreground transition-transform hover:scale-[1.02] glow-red md:w-auto md:px-8 md:py-4 md:text-base"
       >
         QUERO PROTEGER MEU FILHO
       </button>
@@ -423,17 +423,17 @@ function Sales() {
         <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-destructive/40 bg-destructive/10 px-4 py-1.5 text-xs font-bold tracking-widest text-destructive">
           <AlertTriangle className="h-3.5 w-3.5" /> LEITURA URGENTE
         </div>
-        <h1 className="mx-auto mt-5 max-w-3xl text-4xl font-bold leading-[1.05] md:text-6xl">
+        <h1 className="mx-auto mt-5 max-w-3xl text-3xl font-bold leading-[1.05] md:text-6xl">
           O Guia Que Está Ajudando Pais a Protegerem Seus Filhos dos{" "}
           <span className="text-neon text-glow-blue">Perigos Ocultos da Internet</span>{" "}
           Antes Que Algo Grave Aconteça
         </h1>
-        <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground md:text-xl">
+        <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground md:text-xl">
           Descubra como identificar ameaças digitais, evitar exposição a conteúdos inadequados e proteger seus filhos mesmo que você não entenda nada de tecnologia.
         </p>
 
-        <div className="mx-auto mt-7 max-w-2xl rounded-2xl border border-destructive/60 bg-destructive px-5 py-4 glow-red">
-          <p className="text-base font-bold leading-snug text-destructive-foreground md:text-xl">
+        <div className="mx-auto mt-7 max-w-2xl rounded-2xl border border-destructive/60 bg-destructive px-4 py-3 glow-red md:px-5 md:py-4">
+          <p className="text-sm font-bold leading-snug text-destructive-foreground md:text-xl">
             A maioria dos pais só descobre o perigo depois que algo acontece. Descubra como evitar isso hoje.
           </p>
         </div>
@@ -452,10 +452,10 @@ function Sales() {
         />
       </div>
 
-      <div className="mt-8 flex justify-center">
+      <div className="mt-8 flex justify-center px-1">
         <a
           href={CHECKOUT_URL}
-          className="inline-flex w-full max-w-md items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-8 py-5 text-base font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:text-lg"
+          className="inline-flex w-full max-w-md items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-5 py-6 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
         >
           🛡️ QUERO PROTEGER MEU FILHO AGORA
           <ChevronRight className="ml-2 h-5 w-5" />
@@ -479,25 +479,34 @@ function Sales() {
         <p className="font-semibold text-destructive">Seu filho pode estar navegando por ambientes que você nem imagina.</p>
       </section>
 
-      <section className="mt-16 rounded-3xl border border-destructive/40 bg-card/60 p-7 backdrop-blur md:p-10">
-        <h2 className="text-3xl font-bold md:text-4xl">O perigo nem sempre parece perigo</h2>
-        <div className="mt-6 space-y-4 text-lg text-muted-foreground">
+      <section className="mt-16 rounded-3xl border border-destructive/40 bg-card/60 p-6 backdrop-blur md:p-10">
+        <h2 className="text-2xl font-bold md:text-4xl">O perigo nem sempre parece perigo</h2>
+        <div className="mt-6 space-y-4 text-base text-muted-foreground md:text-lg">
           <p>O maior erro dos pais hoje não é deixar o filho usar a internet.</p>
           <p>O erro é acreditar que o perigo é óbvio.</p>
-          <p className="text-2xl font-bold text-foreground">Não é.</p>
+          <p className="text-xl font-bold text-foreground md:text-2xl">Não é.</p>
           <p>Os maiores riscos geralmente chegam disfarçados.</p>
         </div>
         <ul className="mt-6 grid gap-3">
           {risks.map((risk) => (
-            <li key={risk} className="rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 font-semibold text-foreground">
+            <li key={risk} className="rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm font-semibold text-foreground md:text-base">
               {risk}
             </li>
           ))}
         </ul>
-        <div className="mt-6 space-y-4 text-lg text-muted-foreground">
+        <div className="mt-6 space-y-4 text-base text-muted-foreground md:text-lg">
           <p>Muitos pais acreditam que seus filhos saberiam identificar um problema.</p>
           <p>Mas crianças e adolescentes ainda estão aprendendo a reconhecer riscos.</p>
           <p className="font-semibold text-foreground">É por isso que precisam de orientação.</p>
+        </div>
+        <div className="mt-8 flex justify-center px-1">
+          <a
+            href={CHECKOUT_URL}
+            className="inline-flex w-full max-w-md items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-5 py-6 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
+          >
+            🛡️ QUERO PROTEGER MEU FILHO AGORA
+            <ChevronRight className="ml-2 h-5 w-5" />
+          </a>
         </div>
       </section>
 
@@ -505,29 +514,38 @@ function Sales() {
         <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border-2 border-destructive bg-destructive/10 animate-pulse-red">
           <AlertTriangle className="h-10 w-10 text-destructive" />
         </div>
-        <h2 className="mt-6 text-3xl font-black leading-tight text-destructive text-glow-red md:text-5xl">Imagine receber uma ligação da escola...</h2>
-        <div className="mx-auto mt-7 max-w-2xl space-y-4 text-lg text-muted-foreground md:text-xl">
+        <h2 className="mt-6 text-2xl font-black leading-tight text-destructive text-glow-red md:text-5xl">Imagine receber uma ligação da escola...</h2>
+        <div className="mx-auto mt-7 max-w-2xl space-y-4 text-base text-muted-foreground md:text-xl">
           <p>Seu filho sofreu cyberbullying.</p>
           <p>Ou descobrir que ele passou meses conversando com alguém que fingia ser outra criança.</p>
           <p>Ou perceber que conteúdos impróprios influenciaram comportamentos que você não consegue entender.</p>
           <p className="font-bold text-foreground">Nenhum pai acredita que isso vai acontecer com sua família.</p>
           <p className="font-bold text-destructive">Até acontecer.</p>
         </div>
+        <div className="mt-8 flex justify-center px-1">
+          <a
+            href={CHECKOUT_URL}
+            className="inline-flex w-full max-w-md items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-5 py-6 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
+          >
+            🛡️ QUERO PROTEGER MEU FILHO AGORA
+            <ChevronRight className="ml-2 h-5 w-5" />
+          </a>
+        </div>
       </section>
 
-      <section className="mt-16 rounded-3xl border border-neon/40 bg-gradient-to-b from-card/80 to-deep/80 p-7 backdrop-blur glow-blue md:p-10">
-        <h2 className="text-center text-3xl font-bold md:text-4xl">A boa notícia</h2>
-        <div className="mt-6 grid gap-3 text-lg text-foreground md:grid-cols-4">
+      <section className="mt-16 rounded-3xl border border-neon/40 bg-gradient-to-b from-card/80 to-deep/80 p-6 backdrop-blur glow-blue md:p-10">
+        <h2 className="text-center text-2xl font-bold md:text-4xl">A boa notícia</h2>
+        <div className="mt-6 grid gap-3 text-base text-foreground md:grid-cols-4 md:text-lg">
           <p className="rounded-xl border border-border bg-card/60 p-4">Você não precisa se tornar especialista em tecnologia.</p>
           <p className="rounded-xl border border-border bg-card/60 p-4">Você só precisa aprender o que observar.</p>
           <p className="rounded-xl border border-border bg-card/60 p-4">O que configurar.</p>
           <p className="rounded-xl border border-border bg-card/60 p-4">Quais sinais nunca ignorar.</p>
         </div>
-        <p className="mt-7 text-center text-lg text-muted-foreground">Foi exatamente para isso que criamos o:</p>
-        <h2 className="mt-3 text-center text-3xl font-black uppercase text-neon text-glow-blue md:text-5xl">
+        <p className="mt-7 text-center text-base text-muted-foreground md:text-lg">Foi exatamente para isso que criamos o:</p>
+        <h2 className="mt-3 text-center text-2xl font-black uppercase text-neon text-glow-blue md:text-5xl">
           Guia Internet Segura Para Seus Filhos
         </h2>
-        <p className="mx-auto mt-5 max-w-2xl text-center text-lg text-muted-foreground">
+        <p className="mx-auto mt-5 max-w-2xl text-center text-base text-muted-foreground md:text-lg">
           Um material direto ao ponto que mostra como proteger seus filhos dos principais perigos da internet moderna.
         </p>
       </section>
@@ -549,18 +567,18 @@ function Sales() {
       </section>
 
       <section className="mt-16 grid gap-6 md:grid-cols-2">
-        <div className="rounded-3xl border border-border bg-card/60 p-7 backdrop-blur">
-          <h2 className="text-2xl font-bold md:text-3xl">Por que este guia é diferente</h2>
-          <div className="mt-5 space-y-3 text-lg text-muted-foreground">
+        <div className="rounded-3xl border border-border bg-card/60 p-6 backdrop-blur md:p-7">
+          <h2 className="text-xl font-bold md:text-3xl">Por que este guia é diferente</h2>
+          <div className="mt-5 space-y-3 text-base text-muted-foreground md:text-lg">
             <p>A maioria dos conteúdos sobre segurança digital é complicada.</p>
             <p>Cheia de termos técnicos.</p>
             <p>Difícil de aplicar.</p>
             <p className="font-semibold text-foreground">Este guia foi criado para pais comuns.</p>
           </div>
         </div>
-        <div className="rounded-3xl border border-neon/40 bg-neon/10 p-7 backdrop-blur">
-          <h2 className="text-2xl font-bold md:text-3xl">Orientações simples</h2>
-          <div className="mt-5 space-y-3 text-lg text-muted-foreground">
+        <div className="rounded-3xl border border-neon/40 bg-neon/10 p-6 backdrop-blur md:p-7">
+          <h2 className="text-xl font-bold md:text-3xl">Orientações simples</h2>
+          <div className="mt-5 space-y-3 text-base text-muted-foreground md:text-lg">
             <p>Você recebe orientações simples.</p>
             <p>Objetivas.</p>
             <p>Práticas.</p>
@@ -635,23 +653,23 @@ function Sales() {
           <div className="inline-flex items-center gap-2 rounded-full border border-destructive/40 bg-destructive/10 px-4 py-1.5 text-xs font-bold tracking-widest text-destructive">
             <Clock className="h-3.5 w-3.5" /> OFERTA POR TEMPO LIMITADO
           </div>
-          <h2 className="mt-5 text-3xl font-bold md:text-4xl">Acesso Imediato ao Guia Completo</h2>
+          <h2 className="mt-5 text-2xl font-bold md:text-4xl">Acesso Imediato ao Guia Completo</h2>
 
-          <div className="mx-auto mt-7 max-w-md space-y-2 rounded-2xl border border-border bg-card/60 p-5 text-left text-muted-foreground">
+          <div className="mx-auto mt-7 max-w-md space-y-2 rounded-2xl border border-border bg-card/60 p-4 text-left text-sm text-muted-foreground md:p-5 md:text-base">
             <p>Hoje você não vai pagar:</p>
             <p><span className="line-through">R$97</span> pelo guia</p>
             <p><span className="line-through">R$27</span> pelo checklist</p>
             <p><span className="line-through">R$19</span> pelo roteiro</p>
             <p><span className="line-through">R$37</span> pelo guia de aplicativos</p>
-            <p className="pt-2 text-center text-lg font-bold text-foreground">Total: <span className="line-through text-destructive">R$180</span></p>
+            <p className="pt-2 text-center text-base font-bold text-foreground md:text-lg">Total: <span className="line-through text-destructive">R$180</span></p>
           </div>
 
           <div className="mx-auto mt-8 flex max-w-sm flex-col items-center">
             <div className="text-sm text-muted-foreground">Por apenas:</div>
             <div className="mt-2 flex items-baseline gap-2">
-              <span className="text-2xl font-bold text-muted-foreground">R$</span>
-              <span className="font-display text-7xl font-black text-neon text-glow-blue">37</span>
-              <span className="text-2xl font-bold text-muted-foreground">,00</span>
+              <span className="text-xl font-bold text-muted-foreground md:text-2xl">R$</span>
+              <span className="font-display text-5xl font-black text-neon text-glow-blue md:text-7xl">37</span>
+              <span className="text-xl font-bold text-muted-foreground md:text-2xl">,00</span>
             </div>
             <p className="mt-2 text-sm text-muted-foreground">Pagamento único · Acesso imediato</p>
           </div>
@@ -665,7 +683,7 @@ function Sales() {
 
           <a
             href={CHECKOUT_URL}
-            className="mt-8 inline-flex w-full max-w-md items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-8 py-5 text-base font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:text-lg"
+            className="mt-8 inline-flex w-full max-w-md items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-5 py-6 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
           >
             🛡️ QUERO PROTEGER MEU FILHO AGORA
             <ChevronRight className="ml-2 h-5 w-5" />
@@ -682,8 +700,8 @@ function Sales() {
         </div>
       </section>
 
-      <section className="mt-16 rounded-3xl border border-border bg-card/60 p-7 backdrop-blur md:p-10">
-        <h2 className="text-center text-3xl font-bold md:text-4xl">Perguntas Frequentes</h2>
+      <section className="mt-16 rounded-3xl border border-border bg-card/60 p-6 backdrop-blur md:p-10">
+        <h2 className="text-center text-2xl font-bold md:text-4xl">Perguntas Frequentes</h2>
         <div className="mt-8 grid gap-4">
           {[
             ["Preciso entender de tecnologia?", "Não. O guia foi criado para pais comuns."],
@@ -693,22 +711,22 @@ function Sales() {
             ["O pagamento é único?", "Sim. Sem mensalidades ou cobranças recorrentes."],
           ].map(([question, answer]) => (
             <div key={question} className="border-b border-border pb-4 last:border-b-0 last:pb-0">
-              <h3 className="font-bold text-foreground">{question}</h3>
-              <p className="mt-1 text-muted-foreground">{answer}</p>
+              <h3 className="text-base font-bold text-foreground md:text-lg">{question}</h3>
+              <p className="mt-1 text-sm text-muted-foreground md:text-base">{answer}</p>
             </div>
           ))}
         </div>
       </section>
 
       <section className="mt-16 text-center">
-        <h2 className="text-3xl font-bold md:text-4xl">A melhor proteção sempre será a prevenção.</h2>
-        <div className="mx-auto mt-5 max-w-2xl space-y-4 text-lg text-muted-foreground">
+        <h2 className="text-2xl font-bold md:text-4xl">A melhor proteção sempre será a prevenção.</h2>
+        <div className="mx-auto mt-5 max-w-2xl space-y-4 text-base text-muted-foreground md:text-lg">
           <p>Seu filho não precisa passar por uma situação perigosa para que você comece a agir.</p>
           <p>Quanto mais cedo você aprender a identificar os riscos, maiores são as chances de evitar problemas que podem impactar sua família por anos.</p>
         </div>
         <a
           href={CHECKOUT_URL}
-          className="mt-8 inline-flex w-full max-w-md items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-8 py-5 text-base font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:text-lg"
+          className="mt-8 inline-flex w-full max-w-md items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-5 py-6 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
         >
           🛡️ QUERO PROTEGER MEU FILHO AGORA POR R$37
           <ChevronRight className="ml-2 h-5 w-5" />
@@ -716,10 +734,10 @@ function Sales() {
       </section>
 
       {/* STICKY MOBILE CTA */}
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-neon/30 bg-deep/95 p-3 backdrop-blur md:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-neon/30 bg-deep/95 p-3 pb-5 backdrop-blur md:hidden">
         <a
           href={CHECKOUT_URL}
-          className="flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-6 py-4 text-sm font-bold uppercase tracking-wide text-primary-foreground glow-blue"
+          className="flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-5 py-5 text-sm font-bold uppercase tracking-wide text-primary-foreground glow-blue min-h-[56px]"
         >
           🛡️ PROTEGER MEU FILHO · R$37
           <ChevronRight className="ml-1 h-4 w-4" />
