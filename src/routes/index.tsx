@@ -653,23 +653,23 @@ function Sales() {
           <div className="inline-flex items-center gap-2 rounded-full border border-destructive/40 bg-destructive/10 px-4 py-1.5 text-xs font-bold tracking-widest text-destructive">
             <Clock className="h-3.5 w-3.5" /> OFERTA POR TEMPO LIMITADO
           </div>
-          <h2 className="mt-5 text-3xl font-bold md:text-4xl">Acesso Imediato ao Guia Completo</h2>
+          <h2 className="mt-5 text-2xl font-bold md:text-4xl">Acesso Imediato ao Guia Completo</h2>
 
-          <div className="mx-auto mt-7 max-w-md space-y-2 rounded-2xl border border-border bg-card/60 p-5 text-left text-muted-foreground">
+          <div className="mx-auto mt-7 max-w-md space-y-2 rounded-2xl border border-border bg-card/60 p-4 text-left text-sm text-muted-foreground md:p-5 md:text-base">
             <p>Hoje você não vai pagar:</p>
             <p><span className="line-through">R$97</span> pelo guia</p>
             <p><span className="line-through">R$27</span> pelo checklist</p>
             <p><span className="line-through">R$19</span> pelo roteiro</p>
             <p><span className="line-through">R$37</span> pelo guia de aplicativos</p>
-            <p className="pt-2 text-center text-lg font-bold text-foreground">Total: <span className="line-through text-destructive">R$180</span></p>
+            <p className="pt-2 text-center text-base font-bold text-foreground md:text-lg">Total: <span className="line-through text-destructive">R$180</span></p>
           </div>
 
           <div className="mx-auto mt-8 flex max-w-sm flex-col items-center">
             <div className="text-sm text-muted-foreground">Por apenas:</div>
             <div className="mt-2 flex items-baseline gap-2">
-              <span className="text-2xl font-bold text-muted-foreground">R$</span>
-              <span className="font-display text-7xl font-black text-neon text-glow-blue">37</span>
-              <span className="text-2xl font-bold text-muted-foreground">,00</span>
+              <span className="text-xl font-bold text-muted-foreground md:text-2xl">R$</span>
+              <span className="font-display text-5xl font-black text-neon text-glow-blue md:text-7xl">37</span>
+              <span className="text-xl font-bold text-muted-foreground md:text-2xl">,00</span>
             </div>
             <p className="mt-2 text-sm text-muted-foreground">Pagamento único · Acesso imediato</p>
           </div>
@@ -683,7 +683,7 @@ function Sales() {
 
           <a
             href={CHECKOUT_URL}
-            className="mt-8 inline-flex w-full max-w-md items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-8 py-5 text-base font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:text-lg"
+            className="mt-8 inline-flex w-full max-w-md items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-5 py-6 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
           >
             🛡️ QUERO PROTEGER MEU FILHO AGORA
             <ChevronRight className="ml-2 h-5 w-5" />
@@ -700,8 +700,8 @@ function Sales() {
         </div>
       </section>
 
-      <section className="mt-16 rounded-3xl border border-border bg-card/60 p-7 backdrop-blur md:p-10">
-        <h2 className="text-center text-3xl font-bold md:text-4xl">Perguntas Frequentes</h2>
+      <section className="mt-16 rounded-3xl border border-border bg-card/60 p-6 backdrop-blur md:p-10">
+        <h2 className="text-center text-2xl font-bold md:text-4xl">Perguntas Frequentes</h2>
         <div className="mt-8 grid gap-4">
           {[
             ["Preciso entender de tecnologia?", "Não. O guia foi criado para pais comuns."],
@@ -711,22 +711,22 @@ function Sales() {
             ["O pagamento é único?", "Sim. Sem mensalidades ou cobranças recorrentes."],
           ].map(([question, answer]) => (
             <div key={question} className="border-b border-border pb-4 last:border-b-0 last:pb-0">
-              <h3 className="font-bold text-foreground">{question}</h3>
-              <p className="mt-1 text-muted-foreground">{answer}</p>
+              <h3 className="text-base font-bold text-foreground md:text-lg">{question}</h3>
+              <p className="mt-1 text-sm text-muted-foreground md:text-base">{answer}</p>
             </div>
           ))}
         </div>
       </section>
 
       <section className="mt-16 text-center">
-        <h2 className="text-3xl font-bold md:text-4xl">A melhor proteção sempre será a prevenção.</h2>
-        <div className="mx-auto mt-5 max-w-2xl space-y-4 text-lg text-muted-foreground">
+        <h2 className="text-2xl font-bold md:text-4xl">A melhor proteção sempre será a prevenção.</h2>
+        <div className="mx-auto mt-5 max-w-2xl space-y-4 text-base text-muted-foreground md:text-lg">
           <p>Seu filho não precisa passar por uma situação perigosa para que você comece a agir.</p>
           <p>Quanto mais cedo você aprender a identificar os riscos, maiores são as chances de evitar problemas que podem impactar sua família por anos.</p>
         </div>
         <a
           href={CHECKOUT_URL}
-          className="mt-8 inline-flex w-full max-w-md items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-8 py-5 text-base font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:text-lg"
+          className="mt-8 inline-flex w-full max-w-md items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-5 py-6 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
         >
           🛡️ QUERO PROTEGER MEU FILHO AGORA POR R$37
           <ChevronRight className="ml-2 h-5 w-5" />
