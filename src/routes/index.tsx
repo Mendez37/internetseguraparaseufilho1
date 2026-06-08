@@ -479,25 +479,34 @@ function Sales() {
         <p className="font-semibold text-destructive">Seu filho pode estar navegando por ambientes que você nem imagina.</p>
       </section>
 
-      <section className="mt-16 rounded-3xl border border-destructive/40 bg-card/60 p-7 backdrop-blur md:p-10">
-        <h2 className="text-3xl font-bold md:text-4xl">O perigo nem sempre parece perigo</h2>
-        <div className="mt-6 space-y-4 text-lg text-muted-foreground">
+      <section className="mt-16 rounded-3xl border border-destructive/40 bg-card/60 p-6 backdrop-blur md:p-10">
+        <h2 className="text-2xl font-bold md:text-4xl">O perigo nem sempre parece perigo</h2>
+        <div className="mt-6 space-y-4 text-base text-muted-foreground md:text-lg">
           <p>O maior erro dos pais hoje não é deixar o filho usar a internet.</p>
           <p>O erro é acreditar que o perigo é óbvio.</p>
-          <p className="text-2xl font-bold text-foreground">Não é.</p>
+          <p className="text-xl font-bold text-foreground md:text-2xl">Não é.</p>
           <p>Os maiores riscos geralmente chegam disfarçados.</p>
         </div>
         <ul className="mt-6 grid gap-3">
           {risks.map((risk) => (
-            <li key={risk} className="rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 font-semibold text-foreground">
+            <li key={risk} className="rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm font-semibold text-foreground md:text-base">
               {risk}
             </li>
           ))}
         </ul>
-        <div className="mt-6 space-y-4 text-lg text-muted-foreground">
+        <div className="mt-6 space-y-4 text-base text-muted-foreground md:text-lg">
           <p>Muitos pais acreditam que seus filhos saberiam identificar um problema.</p>
           <p>Mas crianças e adolescentes ainda estão aprendendo a reconhecer riscos.</p>
           <p className="font-semibold text-foreground">É por isso que precisam de orientação.</p>
+        </div>
+        <div className="mt-8 flex justify-center px-1">
+          <a
+            href={CHECKOUT_URL}
+            className="inline-flex w-full max-w-md items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-5 py-6 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
+          >
+            🛡️ QUERO PROTEGER MEU FILHO AGORA
+            <ChevronRight className="ml-2 h-5 w-5" />
+          </a>
         </div>
       </section>
 
