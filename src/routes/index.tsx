@@ -734,10 +734,10 @@ function Sales() {
       </section>
 
       {/* STICKY MOBILE CTA */}
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-neon/30 bg-deep/95 p-3 backdrop-blur md:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-neon/30 bg-deep/95 p-3 pb-5 backdrop-blur md:hidden">
         <a
           href={CHECKOUT_URL}
-          className="flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-6 py-4 text-sm font-bold uppercase tracking-wide text-primary-foreground glow-blue"
+          className="flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-5 py-5 text-sm font-bold uppercase tracking-wide text-primary-foreground glow-blue min-h-[56px]"
         >
           🛡️ PROTEGER MEU FILHO · R$37
           <ChevronRight className="ml-1 h-4 w-4" />
