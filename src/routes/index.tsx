@@ -567,18 +567,18 @@ function Sales() {
       </section>
 
       <section className="mt-16 grid gap-6 md:grid-cols-2">
-        <div className="rounded-3xl border border-border bg-card/60 p-7 backdrop-blur">
-          <h2 className="text-2xl font-bold md:text-3xl">Por que este guia é diferente</h2>
-          <div className="mt-5 space-y-3 text-lg text-muted-foreground">
+        <div className="rounded-3xl border border-border bg-card/60 p-6 backdrop-blur md:p-7">
+          <h2 className="text-xl font-bold md:text-3xl">Por que este guia é diferente</h2>
+          <div className="mt-5 space-y-3 text-base text-muted-foreground md:text-lg">
             <p>A maioria dos conteúdos sobre segurança digital é complicada.</p>
             <p>Cheia de termos técnicos.</p>
             <p>Difícil de aplicar.</p>
             <p className="font-semibold text-foreground">Este guia foi criado para pais comuns.</p>
           </div>
         </div>
-        <div className="rounded-3xl border border-neon/40 bg-neon/10 p-7 backdrop-blur">
-          <h2 className="text-2xl font-bold md:text-3xl">Orientações simples</h2>
-          <div className="mt-5 space-y-3 text-lg text-muted-foreground">
+        <div className="rounded-3xl border border-neon/40 bg-neon/10 p-6 backdrop-blur md:p-7">
+          <h2 className="text-xl font-bold md:text-3xl">Orientações simples</h2>
+          <div className="mt-5 space-y-3 text-base text-muted-foreground md:text-lg">
             <p>Você recebe orientações simples.</p>
             <p>Objetivas.</p>
             <p>Práticas.</p>
