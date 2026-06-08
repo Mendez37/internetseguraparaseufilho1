@@ -533,19 +533,19 @@ function Sales() {
         </div>
       </section>
 
-      <section className="mt-16 rounded-3xl border border-neon/40 bg-gradient-to-b from-card/80 to-deep/80 p-7 backdrop-blur glow-blue md:p-10">
-        <h2 className="text-center text-3xl font-bold md:text-4xl">A boa notícia</h2>
-        <div className="mt-6 grid gap-3 text-lg text-foreground md:grid-cols-4">
+      <section className="mt-16 rounded-3xl border border-neon/40 bg-gradient-to-b from-card/80 to-deep/80 p-6 backdrop-blur glow-blue md:p-10">
+        <h2 className="text-center text-2xl font-bold md:text-4xl">A boa notícia</h2>
+        <div className="mt-6 grid gap-3 text-base text-foreground md:grid-cols-4 md:text-lg">
           <p className="rounded-xl border border-border bg-card/60 p-4">Você não precisa se tornar especialista em tecnologia.</p>
           <p className="rounded-xl border border-border bg-card/60 p-4">Você só precisa aprender o que observar.</p>
           <p className="rounded-xl border border-border bg-card/60 p-4">O que configurar.</p>
           <p className="rounded-xl border border-border bg-card/60 p-4">Quais sinais nunca ignorar.</p>
         </div>
-        <p className="mt-7 text-center text-lg text-muted-foreground">Foi exatamente para isso que criamos o:</p>
-        <h2 className="mt-3 text-center text-3xl font-black uppercase text-neon text-glow-blue md:text-5xl">
+        <p className="mt-7 text-center text-base text-muted-foreground md:text-lg">Foi exatamente para isso que criamos o:</p>
+        <h2 className="mt-3 text-center text-2xl font-black uppercase text-neon text-glow-blue md:text-5xl">
           Guia Internet Segura Para Seus Filhos
         </h2>
-        <p className="mx-auto mt-5 max-w-2xl text-center text-lg text-muted-foreground">
+        <p className="mx-auto mt-5 max-w-2xl text-center text-base text-muted-foreground md:text-lg">
           Um material direto ao ponto que mostra como proteger seus filhos dos principais perigos da internet moderna.
         </p>
       </section>
