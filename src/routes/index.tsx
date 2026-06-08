@@ -452,10 +452,10 @@ function Sales() {
         />
       </div>
 
-      <div className="mt-8 flex justify-center">
+      <div className="mt-8 flex justify-center px-1">
         <a
           href={CHECKOUT_URL}
-          className="inline-flex w-full max-w-md items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-8 py-5 text-base font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:text-lg"
+          className="inline-flex w-full max-w-md items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-5 py-6 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
         >
           🛡️ QUERO PROTEGER MEU FILHO AGORA
           <ChevronRight className="ml-2 h-5 w-5" />
