@@ -423,17 +423,17 @@ function Sales() {
         <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-destructive/40 bg-destructive/10 px-4 py-1.5 text-xs font-bold tracking-widest text-destructive">
           <AlertTriangle className="h-3.5 w-3.5" /> LEITURA URGENTE
         </div>
-        <h1 className="mx-auto mt-5 max-w-3xl text-4xl font-bold leading-[1.05] md:text-6xl">
+        <h1 className="mx-auto mt-5 max-w-3xl text-3xl font-bold leading-[1.05] md:text-6xl">
           O Guia Que Está Ajudando Pais a Protegerem Seus Filhos dos{" "}
           <span className="text-neon text-glow-blue">Perigos Ocultos da Internet</span>{" "}
           Antes Que Algo Grave Aconteça
         </h1>
-        <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground md:text-xl">
+        <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground md:text-xl">
           Descubra como identificar ameaças digitais, evitar exposição a conteúdos inadequados e proteger seus filhos mesmo que você não entenda nada de tecnologia.
         </p>
 
-        <div className="mx-auto mt-7 max-w-2xl rounded-2xl border border-destructive/60 bg-destructive px-5 py-4 glow-red">
-          <p className="text-base font-bold leading-snug text-destructive-foreground md:text-xl">
+        <div className="mx-auto mt-7 max-w-2xl rounded-2xl border border-destructive/60 bg-destructive px-4 py-3 glow-red md:px-5 md:py-4">
+          <p className="text-sm font-bold leading-snug text-destructive-foreground md:text-xl">
             A maioria dos pais só descobre o perigo depois que algo acontece. Descubra como evitar isso hoje.
           </p>
         </div>
