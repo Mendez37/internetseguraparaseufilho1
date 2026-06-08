@@ -220,11 +220,11 @@ function Break({
       }`}>
         {badge}
       </div>
-      <h2 className="mx-auto mt-5 max-w-2xl text-3xl font-bold leading-tight md:text-5xl">{title}</h2>
-      <p className="mx-auto mt-5 max-w-xl text-lg text-muted-foreground">{body}</p>
+      <h2 className="mx-auto mt-5 max-w-2xl text-2xl font-bold leading-tight md:text-5xl">{title}</h2>
+      <p className="mx-auto mt-5 max-w-xl text-base text-muted-foreground md:text-lg">{body}</p>
       <button
         onClick={onContinue}
-        className="mt-10 rounded-xl bg-gradient-to-r from-neon to-primary px-10 py-4 font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow"
+        className="mt-10 w-full max-w-sm rounded-xl bg-gradient-to-r from-neon to-primary px-6 py-5 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:w-auto md:px-10 md:py-4 md:text-base"
       >
         {cta} <ChevronRight className="ml-1 inline h-5 w-5" />
       </button>
@@ -242,7 +242,7 @@ function BreakShock({ onContinue }: { onContinue: () => void }) {
       <h2 className="mt-6 text-4xl font-black leading-none tracking-tight text-destructive text-glow-red md:text-7xl">
         🚨 ATENÇÃO
       </h2>
-      <p className="mx-auto mt-6 max-w-xl text-xl font-semibold text-foreground md:text-2xl">
+      <p className="mx-auto mt-6 max-w-xl text-lg font-semibold text-foreground md:text-2xl">
         Seu filho pode estar em perigo neste exato momento.
       </p>
       <div className="mx-auto mt-8 max-w-xl space-y-4 text-left text-base text-muted-foreground md:text-lg">
@@ -256,7 +256,7 @@ function BreakShock({ onContinue }: { onContinue: () => void }) {
       </div>
       <button
         onClick={onContinue}
-        className="mt-10 rounded-xl bg-destructive px-8 py-4 font-bold uppercase tracking-wide text-destructive-foreground transition-transform hover:scale-[1.02] glow-red"
+        className="mt-10 w-full max-w-sm rounded-xl bg-destructive px-6 py-5 text-sm font-bold uppercase tracking-wide text-destructive-foreground transition-transform hover:scale-[1.02] glow-red md:w-auto md:px-8 md:py-4 md:text-base"
       >
         QUERO PROTEGER MEU FILHO
       </button>
