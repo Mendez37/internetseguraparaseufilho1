@@ -124,7 +124,7 @@ function Intro({ onStart }: { onStart: () => void }) {
         ALERTA DE SEGURANÇA DIGITAL
       </div>
 
-      <h1 className="mt-6 text-center text-4xl font-bold leading-[1.05] md:text-6xl">
+      <h1 className="mt-6 text-center text-3xl font-bold leading-[1.05] md:text-6xl">
         Você Sabe o Que Seu Filho{" "}
         <span className="text-neon text-glow-blue">Faz na Internet</span>{" "}
         Quando Você Não Está Olhando?
@@ -151,7 +151,7 @@ function Intro({ onStart }: { onStart: () => void }) {
       <div className="mt-10 flex flex-col items-center gap-4">
         <button
           onClick={onStart}
-          className="group relative w-full max-w-md rounded-xl bg-gradient-to-r from-neon to-primary px-8 py-5 text-base font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.98] animate-pulse-glow md:text-lg"
+          className="group relative w-full max-w-md rounded-xl bg-gradient-to-r from-neon to-primary px-6 py-6 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.98] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
         >
           QUERO DESCOBRIR AGORA
           <ChevronRight className="ml-2 inline h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -239,7 +239,7 @@ function BreakShock({ onContinue }: { onContinue: () => void }) {
       <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border-2 border-destructive bg-destructive/10 animate-pulse-red">
         <AlertTriangle className="h-10 w-10 text-destructive" />
       </div>
-      <h2 className="mt-6 text-5xl font-black leading-none tracking-tight text-destructive text-glow-red md:text-7xl">
+      <h2 className="mt-6 text-4xl font-black leading-none tracking-tight text-destructive text-glow-red md:text-7xl">
         🚨 ATENÇÃO
       </h2>
       <p className="mx-auto mt-6 max-w-xl text-xl font-semibold text-foreground md:text-2xl">
