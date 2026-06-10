@@ -694,8 +694,8 @@ function Sales() {
             href={CHECKOUT_URL}
             className="mt-8 inline-flex w-full max-w-md items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-neon to-primary px-4 py-5 text-[13px] font-bold uppercase leading-tight tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
           >
-            <span className="md:hidden">🛡️ PROTEGER MEU FILHO · R$37</span>
-            <span className="hidden md:inline">🛡️ QUERO PROTEGER MEU FILHO AGORA</span>
+            <span className="md:hidden">✅ ACESSO IMEDIATO · R$37</span>
+            <span className="hidden md:inline">✅ QUERO ACESSO IMEDIATO AGORA</span>
             <ChevronRight className="h-5 w-5 shrink-0" />
           </a>
 
