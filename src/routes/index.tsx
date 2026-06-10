@@ -462,9 +462,8 @@ function Sales() {
           <ChevronRight className="h-5 w-5 shrink-0" />
         </a>
       </div>
-    </header>
 
-    <section className="mt-16 space-y-5 text-lg leading-relaxed text-muted-foreground md:text-xl">
+      <section className="mt-16 space-y-5 text-lg leading-relaxed text-muted-foreground md:text-xl">
         <p className="text-foreground">Se você chegou até aqui...</p>
         <p>Provavelmente existe uma preocupação que passa pela sua cabeça de vez em quando.</p>
         <p className="rounded-2xl border border-neon/40 bg-neon/10 p-5 text-center font-semibold text-foreground glow-blue">
