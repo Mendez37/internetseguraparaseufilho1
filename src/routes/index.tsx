@@ -395,10 +395,10 @@ function Sales() {
   ];
 
   const bonuses = [
-    { title: "📘 Guia Internet Segura Para Seus Filhos", value: "R$97", text: "O material principal com orientações práticas para proteger seus filhos dos riscos digitais." },
-    { title: "🚨 Checklist: 50 Sinais de Alerta", value: "R$27", text: "Descubra comportamentos que podem indicar exposição a riscos online antes que se tornem um problema sério." },
-    { title: "💬 Roteiro de Conversa com Seu Filho", value: "R$19", text: "Saiba exatamente o que dizer para abordar segurança digital sem discussões ou resistência." },
-    { title: "📱 Guia por Aplicativo", value: "R$37", text: "Aprenda os principais riscos e cuidados em TikTok, Roblox, Instagram, WhatsApp, YouTube, Discord e outros aplicativos populares." },
+    { title: "📘 Guia Internet Segura Para Seus Filhos", from: "R$97,00", to: "R$37,00", text: "O material principal com orientações práticas para proteger seus filhos dos riscos digitais." },
+    { title: "🚨 Checklist: 50 Sinais de Alerta", from: "R$27,00", to: "R$0", text: "Descubra comportamentos que podem indicar exposição a riscos online antes que se tornem um problema sério." },
+    { title: "💬 Roteiro de Conversa com Seu Filho", from: "R$19,00", to: "R$0", text: "Saiba exatamente o que dizer para abordar segurança digital sem discussões ou resistência." },
+    { title: "📱 Guia por Aplicativo", from: "R$37,00", to: "R$0", text: "Aprenda os principais riscos e cuidados em TikTok, Roblox, Instagram, WhatsApp, YouTube, Discord e outros aplicativos populares." },
   ];
 
   const testimonials = [
