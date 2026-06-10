@@ -432,8 +432,9 @@ function Sales() {
           Descubra como identificar ameaças digitais, evitar exposição a conteúdos inadequados e proteger seus filhos mesmo que você não entenda nada de tecnologia.
         </p>
 
-        <div className="mx-auto mt-7 max-w-2xl rounded-2xl border border-destructive/60 bg-destructive px-4 py-3 glow-red md:px-5 md:py-4">
-          <p className="text-sm font-bold leading-snug text-destructive-foreground md:text-xl">
+        <div className="mx-auto mt-7 inline-flex max-w-2xl items-center gap-2 rounded-full border border-destructive/40 bg-destructive/10 px-4 py-2 text-destructive md:px-5 md:py-2.5">
+          <AlertTriangle className="h-4 w-4 flex-shrink-0" />
+          <p className="text-xs font-bold leading-snug tracking-wide md:text-sm">
             A maioria dos pais só descobre o perigo depois que algo acontece. Descubra como evitar isso hoje.
           </p>
         </div>
