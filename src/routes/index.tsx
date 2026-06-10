@@ -609,8 +609,13 @@ function Sales() {
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           {bonuses.map((item) => (
             <div key={item.title} className="rounded-2xl border border-border bg-card/60 p-5 backdrop-blur">
-              <h3 className="text-xl font-bold text-foreground">{item.title}</h3>
-              <p className="mt-2 text-sm font-bold text-neon">Valor: {item.value}</p>
+              <h3 className="text-lg font-bold text-foreground md:text-xl">{item.title}</h3>
+              <p className="mt-2 text-sm font-bold">
+                <span className="text-muted-foreground">Valor: </span>
+                <span className="text-destructive line-through">{item.from}</span>
+                <span className="mx-2 text-muted-foreground">por</span>
+                <span className="font-black text-green-500">{item.to}</span>
+              </p>
               <p className="mt-3 text-muted-foreground">{item.text}</p>
             </div>
           ))}
