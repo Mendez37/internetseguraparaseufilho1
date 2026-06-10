@@ -455,14 +455,16 @@ function Sales() {
       <div className="mt-8 flex justify-center px-1">
         <a
           href={CHECKOUT_URL}
-          className="inline-flex w-full max-w-md items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-5 py-6 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
+          className="inline-flex w-full max-w-md items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-neon to-primary px-4 py-5 text-[13px] font-bold uppercase leading-tight tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
         >
-          🛡️ QUERO PROTEGER MEU FILHO AGORA
-          <ChevronRight className="ml-2 h-5 w-5" />
+          <span className="md:hidden">🛡️ PROTEGER MEU FILHO · R$37</span>
+          <span className="hidden md:inline">🛡️ QUERO PROTEGER MEU FILHO AGORA</span>
+          <ChevronRight className="h-5 w-5 shrink-0" />
         </a>
       </div>
+    </header>
 
-      <section className="mt-16 space-y-5 text-lg leading-relaxed text-muted-foreground md:text-xl">
+    <section className="mt-16 space-y-5 text-lg leading-relaxed text-muted-foreground md:text-xl">
         <p className="text-foreground">Se você chegou até aqui...</p>
         <p>Provavelmente existe uma preocupação que passa pela sua cabeça de vez em quando.</p>
         <p className="rounded-2xl border border-neon/40 bg-neon/10 p-5 text-center font-semibold text-foreground glow-blue">
