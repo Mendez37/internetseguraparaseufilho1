@@ -395,10 +395,10 @@ function Sales() {
   ];
 
   const bonuses = [
-    { title: "📘 Guia Internet Segura Para Seus Filhos", value: "R$97", text: "O material principal com orientações práticas para proteger seus filhos dos riscos digitais." },
-    { title: "🚨 Checklist: 50 Sinais de Alerta", value: "R$27", text: "Descubra comportamentos que podem indicar exposição a riscos online antes que se tornem um problema sério." },
-    { title: "💬 Roteiro de Conversa com Seu Filho", value: "R$19", text: "Saiba exatamente o que dizer para abordar segurança digital sem discussões ou resistência." },
-    { title: "📱 Guia por Aplicativo", value: "R$37", text: "Aprenda os principais riscos e cuidados em TikTok, Roblox, Instagram, WhatsApp, YouTube, Discord e outros aplicativos populares." },
+    { title: "📘 Guia Internet Segura Para Seus Filhos", from: "R$97,00", to: "R$37,00", text: "O material principal com orientações práticas para proteger seus filhos dos riscos digitais." },
+    { title: "🚨 Checklist: 50 Sinais de Alerta", from: "R$27,00", to: "R$0", text: "Descubra comportamentos que podem indicar exposição a riscos online antes que se tornem um problema sério." },
+    { title: "💬 Roteiro de Conversa com Seu Filho", from: "R$19,00", to: "R$0", text: "Saiba exatamente o que dizer para abordar segurança digital sem discussões ou resistência." },
+    { title: "📱 Guia por Aplicativo", from: "R$37,00", to: "R$0", text: "Aprenda os principais riscos e cuidados em TikTok, Roblox, Instagram, WhatsApp, YouTube, Discord e outros aplicativos populares." },
   ];
 
   const testimonials = [
@@ -455,10 +455,11 @@ function Sales() {
       <div className="mt-8 flex justify-center px-1">
         <a
           href={CHECKOUT_URL}
-          className="inline-flex w-full max-w-md items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-5 py-6 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
+          className="inline-flex w-full max-w-md items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-neon to-primary px-4 py-5 text-[13px] font-bold uppercase leading-tight tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
         >
-          🛡️ QUERO PROTEGER MEU FILHO AGORA
-          <ChevronRight className="ml-2 h-5 w-5" />
+          <span className="md:hidden">🛡️ PROTEGER MEU FILHO · R$37</span>
+          <span className="hidden md:inline">🛡️ QUERO PROTEGER MEU FILHO AGORA</span>
+          <ChevronRight className="h-5 w-5 shrink-0" />
         </a>
       </div>
 
@@ -502,10 +503,11 @@ function Sales() {
         <div className="mt-8 flex justify-center px-1">
           <a
             href={CHECKOUT_URL}
-            className="inline-flex w-full max-w-md items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-5 py-6 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
+            className="inline-flex w-full max-w-md items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-neon to-primary px-4 py-5 text-[13px] font-bold uppercase leading-tight tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
           >
-            🛡️ QUERO PROTEGER MEU FILHO AGORA
-            <ChevronRight className="ml-2 h-5 w-5" />
+            <span className="md:hidden">🛡️ PROTEGER MEU FILHO · R$37</span>
+            <span className="hidden md:inline">🛡️ QUERO PROTEGER MEU FILHO AGORA</span>
+            <ChevronRight className="h-5 w-5 shrink-0" />
           </a>
         </div>
       </section>
@@ -525,10 +527,11 @@ function Sales() {
         <div className="mt-8 flex justify-center px-1">
           <a
             href={CHECKOUT_URL}
-            className="inline-flex w-full max-w-md items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-5 py-6 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
+            className="inline-flex w-full max-w-md items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-neon to-primary px-4 py-5 text-[13px] font-bold uppercase leading-tight tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
           >
-            🛡️ QUERO PROTEGER MEU FILHO AGORA
-            <ChevronRight className="ml-2 h-5 w-5" />
+            <span className="md:hidden">🛡️ PROTEGER MEU FILHO · R$37</span>
+            <span className="hidden md:inline">🛡️ QUERO PROTEGER MEU FILHO AGORA</span>
+            <ChevronRight className="h-5 w-5 shrink-0" />
           </a>
         </div>
       </section>
@@ -609,8 +612,13 @@ function Sales() {
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           {bonuses.map((item) => (
             <div key={item.title} className="rounded-2xl border border-border bg-card/60 p-5 backdrop-blur">
-              <h3 className="text-xl font-bold text-foreground">{item.title}</h3>
-              <p className="mt-2 text-sm font-bold text-neon">Valor: {item.value}</p>
+              <h3 className="text-lg font-bold text-foreground md:text-xl">{item.title}</h3>
+              <p className="mt-2 text-sm font-bold">
+                <span className="text-muted-foreground">Valor: </span>
+                <span className="text-destructive line-through">{item.from}</span>
+                <span className="mx-2 text-muted-foreground">por</span>
+                <span className="font-black text-green-500">{item.to}</span>
+              </p>
               <p className="mt-3 text-muted-foreground">{item.text}</p>
             </div>
           ))}
@@ -683,10 +691,11 @@ function Sales() {
 
           <a
             href={CHECKOUT_URL}
-            className="mt-8 inline-flex w-full max-w-md items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-5 py-6 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
+            className="mt-8 inline-flex w-full max-w-md items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-neon to-primary px-4 py-5 text-[13px] font-bold uppercase leading-tight tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
           >
-            🛡️ QUERO PROTEGER MEU FILHO AGORA
-            <ChevronRight className="ml-2 h-5 w-5" />
+            <span className="md:hidden">🛡️ PROTEGER MEU FILHO · R$37</span>
+            <span className="hidden md:inline">🛡️ QUERO PROTEGER MEU FILHO AGORA</span>
+            <ChevronRight className="h-5 w-5 shrink-0" />
           </a>
 
           {/* GUARANTEE */}
@@ -726,10 +735,11 @@ function Sales() {
         </div>
         <a
           href={CHECKOUT_URL}
-          className="mt-8 inline-flex w-full max-w-md items-center justify-center rounded-xl bg-gradient-to-r from-neon to-primary px-5 py-6 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
+          className="mt-8 inline-flex w-full max-w-md items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-neon to-primary px-4 py-5 text-[13px] font-bold uppercase leading-tight tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
         >
-          🛡️ QUERO PROTEGER MEU FILHO AGORA POR R$37
-          <ChevronRight className="ml-2 h-5 w-5" />
+          <span className="md:hidden">🛡️ PROTEGER MEU FILHO · R$37</span>
+          <span className="hidden md:inline">🛡️ QUERO PROTEGER MEU FILHO AGORA POR R$37</span>
+          <ChevronRight className="h-5 w-5 shrink-0" />
         </a>
       </section>
 
