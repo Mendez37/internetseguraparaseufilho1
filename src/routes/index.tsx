@@ -36,8 +36,8 @@ const QUIZ_STEPS: Step[] = ["q1","q2","q3","q4","q5","q6","q7","q8","q9"];
 // risco: quanto maior, mais "exposto" — usado para o score final
 const QUESTIONS: Record<string, { title: (name: string) => string; options: string[]; risk: number[] }> = {
   q1: { title: (n) => `${n} usa celular sem supervisão?`, options: ["📱 Todos os dias","⏰ Frequentemente","👀 Às vezes","🛡️ Quase nunca"], risk: [3,2,1,0] },
-  q2: { title: (n) => `Você sabe com quem ${n} conversa online?`, options: ["✅ Sei exatamente","🤔 Tenho uma ideia","⚠️ Não tenho certeza","🚨 Não faço ideia"], risk: [0,1,2,3] },
-  q3: { title: (n) => `${n} possui redes sociais?`, options: ["📲 Sim, várias","👥 Apenas algumas","🔎 Apenas uma","🛡️ Não possui"], risk: [3,2,1,0] },
+  q2: { title: () => `Você sabe com quem ele(a) conversa online?`, options: ["✅ Sei exatamente","🤔 Tenho uma ideia","⚠️ Não tenho certeza","🚨 Não faço ideia"], risk: [0,1,2,3] },
+  q3: { title: () => `Ele(a) possui redes sociais?`, options: ["📲 Sim, várias","👥 Apenas algumas","🔎 Apenas uma","🛡️ Não possui"], risk: [3,2,1,0] },
   q4: { title: () => "Você verifica as configurações de privacidade dos aplicativos?", options: ["🔐 Sempre","👀 Às vezes","⚠️ Raramente","🚫 Nunca"], risk: [0,1,2,3] },
   q5: { title: (n) => `${n} já recebeu mensagens de desconhecidos?`, options: ["🚨 Sim","🤔 Talvez","⚠️ Não sei","✅ Não"], risk: [3,2,2,0] },
   q6: { title: () => "Você utiliza algum tipo de controle parental?", options: ["🛡️ Sim","🔧 Já tentei","📘 Conheço mas não uso","🚫 Não uso"], risk: [0,1,2,3] },
@@ -53,7 +53,6 @@ const SECTION_LABELS: Record<string, string> = {
 };
 
 const SECTION_INTROS: Record<string, string> = {
-  q1: "Você está indo bem. Muitos pais não sabem responder essas perguntas de cabeça — e tudo bem, é exatamente por isso que esse teste existe.",
   q4: "✅ Etapa \"Hábitos de Uso\" concluída. Agora vamos entender como está a privacidade e a exposição a riscos.",
   q7: "✅ Etapa \"Privacidade & Riscos\" concluída. Faltam só 3 perguntas — e elas são sobre o que você quer pra sua família.",
 };
@@ -397,9 +396,9 @@ function BreakShock({ childName, onContinue }: { childName: string; onContinue: 
         {childName} pode estar em perigo neste exato momento.
       </p>
       <div className="mx-auto mt-8 max-w-xl space-y-4 text-left text-base text-muted-foreground md:text-lg">
-        <p>Eu sei que você jamais gostaria de receber uma ligação da escola sobre {childName}.</p>
-        <p>Ou descobrir tarde demais que {childName} foi vítima de cyberbullying.</p>
-        <p>Ou perceber que {childName} teve contato com pessoas perigosas online.</p>
+        <p>Eu sei que você jamais gostaria de receber uma ligação da escola sobre ele(a).</p>
+        <p>Ou descobrir tarde demais que ele(a) foi vítima de cyberbullying.</p>
+        <p>Ou perceber que ele(a) teve contato com pessoas perigosas online.</p>
         <p className="font-semibold text-foreground">Mas a verdade é simples:</p>
         <p className="border-l-2 border-neon pl-4 italic text-foreground">
           A segurança digital de {childName} depende das decisões tomadas hoje.
@@ -713,9 +712,9 @@ function Sales({ childName }: { childName: string }) {
         </div>
         <h2 className="mt-6 text-2xl font-black leading-tight text-destructive text-glow-red md:text-5xl">Imagine receber uma ligação da escola sobre {childName}...</h2>
         <div className="mx-auto mt-7 max-w-2xl space-y-4 text-base text-muted-foreground md:text-xl">
-          <p>{childName} sofreu cyberbullying.</p>
-          <p>Ou você descobre que {childName} passou meses conversando com alguém que fingia ser outra criança.</p>
-          <p>Ou percebe que conteúdos impróprios influenciaram comportamentos de {childName} que você não consegue entender.</p>
+          <p>Ele(a) sofreu cyberbullying.</p>
+          <p>Ou você descobre que ele(a) passou meses conversando com alguém que fingia ser outra criança.</p>
+          <p>Ou percebe que conteúdos impróprios influenciaram comportamentos dele(a) que você não consegue entender.</p>
           <p className="font-bold text-foreground">Nenhum pai acredita que isso vai acontecer com sua família.</p>
           <p className="font-bold text-destructive">Até acontecer.</p>
         </div>
