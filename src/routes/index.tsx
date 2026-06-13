@@ -18,7 +18,9 @@ export const Route = createFileRoute("/")({
 });
 
 type Step =
+  | "news"
   | "intro"
+  | "name"
   | "q1" | "q2" | "q3"
   | "break1"
   | "q4" | "q5" | "q6"
@@ -31,30 +33,56 @@ type Step =
 
 const QUIZ_STEPS: Step[] = ["q1","q2","q3","q4","q5","q6","q7","q8","q9"];
 
-const QUESTIONS: Record<string, { title: string; options: string[] }> = {
-  q1: { title: "Seu filho usa celular sem supervisão?", options: ["📱 Todos os dias","⏰ Frequentemente","👀 Às vezes","🛡️ Quase nunca"] },
-  q2: { title: "Você sabe com quem ele conversa online?", options: ["✅ Sei exatamente","🤔 Tenho uma ideia","⚠️ Não tenho certeza","🚨 Não faço ideia"] },
-  q3: { title: "Seu filho possui redes sociais?", options: ["📲 Sim, várias","👥 Apenas algumas","🔎 Apenas uma","🛡️ Não possui"] },
-  q4: { title: "Você verifica as configurações de privacidade dos aplicativos?", options: ["🔐 Sempre","👀 Às vezes","⚠️ Raramente","🚫 Nunca"] },
-  q5: { title: "Seu filho já recebeu mensagens de desconhecidos?", options: ["🚨 Sim","🤔 Talvez","⚠️ Não sei","✅ Não"] },
-  q6: { title: "Você utiliza algum tipo de controle parental?", options: ["🛡️ Sim","🔧 Já tentei","📘 Conheço mas não uso","🚫 Não uso"] },
-  q7: { title: "Como você gostaria de se sentir em relação à internet?", options: ["😌 Tranquilo","💪 Confiante","🛡️ Seguro","🎯 No controle"] },
-  q8: { title: "O que seria mais importante para você?", options: ["🚨 Evitar perigos","🔐 Proteger a privacidade","⏳ Controlar o tempo de tela","✅ Tudo isso"] },
-  q9: { title: "Você gostaria de aprender estratégias simples para proteger seus filhos?", options: ["🛡️ Com certeza","✅ Sim","🤔 Talvez","📘 Preciso conhecer"] },
+// risco: quanto maior, mais "exposto" — usado para o score final
+const QUESTIONS: Record<string, { title: (name: string) => string; options: string[]; risk: number[] }> = {
+  q1: { title: (n) => `${n} usa celular sem supervisão?`, options: ["📱 Todos os dias","⏰ Frequentemente","👀 Às vezes","🛡️ Quase nunca"], risk: [3,2,1,0] },
+  q2: { title: (n) => `Você sabe com quem ${n} conversa online?`, options: ["✅ Sei exatamente","🤔 Tenho uma ideia","⚠️ Não tenho certeza","🚨 Não faço ideia"], risk: [0,1,2,3] },
+  q3: { title: (n) => `${n} possui redes sociais?`, options: ["📲 Sim, várias","👥 Apenas algumas","🔎 Apenas uma","🛡️ Não possui"], risk: [3,2,1,0] },
+  q4: { title: () => "Você verifica as configurações de privacidade dos aplicativos?", options: ["🔐 Sempre","👀 Às vezes","⚠️ Raramente","🚫 Nunca"], risk: [0,1,2,3] },
+  q5: { title: (n) => `${n} já recebeu mensagens de desconhecidos?`, options: ["🚨 Sim","🤔 Talvez","⚠️ Não sei","✅ Não"], risk: [3,2,2,0] },
+  q6: { title: () => "Você utiliza algum tipo de controle parental?", options: ["🛡️ Sim","🔧 Já tentei","📘 Conheço mas não uso","🚫 Não uso"], risk: [0,1,2,3] },
+  q7: { title: () => "Como você gostaria de se sentir em relação à internet?", options: ["😌 Tranquilo","💪 Confiante","🛡️ Seguro","🎯 No controle"], risk: [0,0,0,0] },
+  q8: { title: () => "O que seria mais importante para você?", options: ["🚨 Evitar perigos","🔐 Proteger a privacidade","⏳ Controlar o tempo de tela","✅ Tudo isso"], risk: [0,0,0,0] },
+  q9: { title: () => "Você gostaria de aprender estratégias simples para proteger seus filhos?", options: ["🛡️ Com certeza","✅ Sim","🤔 Talvez","📘 Preciso conhecer"], risk: [0,0,0,0] },
+};
+
+const SECTION_LABELS: Record<string, string> = {
+  q1: "Hábitos de Uso", q2: "Hábitos de Uso", q3: "Hábitos de Uso",
+  q4: "Privacidade & Riscos", q5: "Privacidade & Riscos", q6: "Privacidade & Riscos",
+  q7: "Seus Objetivos", q8: "Seus Objetivos", q9: "Seus Objetivos",
+};
+
+const SECTION_INTROS: Record<string, string> = {
+  q1: "Você está indo bem. Muitos pais não sabem responder essas perguntas de cabeça — e tudo bem, é exatamente por isso que esse teste existe.",
+  q4: "✅ Etapa \"Hábitos de Uso\" concluída. Agora vamos entender como está a privacidade e a exposição a riscos.",
+  q7: "✅ Etapa \"Privacidade & Riscos\" concluída. Faltam só 3 perguntas — e elas são sobre o que você quer pra sua família.",
 };
 
 const CHECKOUT_URL = "https://pay.kirvano.com/ccf64799-e255-4be5-baf8-8c79f6196ce8";
 const PRODUCT_MOCKUP_URL = "/__l5e/assets-v1/4cc41eae-daa7-43af-b33f-149bacd357fe/guia-internet-segura-mockup.png";
 
 function Funnel() {
-  const [step, setStep] = useState<Step>("intro");
+  const [step, setStep] = useState<Step>("news");
+  const [childName, setChildName] = useState("");
+  const [answers, setAnswers] = useState<Record<string, number>>({});
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [step]);
 
+  const displayName = childName.trim() || "seu filho";
+
   const quizIndex = QUIZ_STEPS.indexOf(step as Step);
   const progress = quizIndex >= 0 ? ((quizIndex + 1) / QUIZ_STEPS.length) * 100 : 0;
+
+  const riskScore = QUIZ_STEPS.slice(0, 6).reduce((acc, key) => {
+    const ansIndex = answers[key];
+    if (ansIndex === undefined) return acc;
+    return acc + QUESTIONS[key].risk[ansIndex];
+  }, 0);
+  // máximo possível: q1-q6, risco máximo 3 cada = 18
+  const riskPct = Math.round((riskScore / 18) * 100);
+  const riskLevel: "ALTO" | "MÉDIO" | "BAIXO" = riskPct >= 55 ? "ALTO" : riskPct >= 25 ? "MÉDIO" : "BAIXO";
 
   return (
     <main className="relative min-h-screen overflow-x-hidden">
@@ -62,13 +90,27 @@ function Funnel() {
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(0,184,255,0.15),transparent_60%)]" />
 
       <div className="relative mx-auto max-w-3xl px-5 py-8 md:py-14">
-        {step === "intro" && <Intro onStart={() => setStep("q1")} />}
+        {step === "news" && <NewsIntro onContinue={() => setStep("intro")} />}
+
+        {step === "intro" && <Intro onStart={() => setStep("name")} />}
+
+        {step === "name" && (
+          <NameCapture
+            value={childName}
+            onChange={setChildName}
+            onContinue={() => setStep("q1")}
+          />
+        )}
 
         {quizIndex >= 0 && (
           <QuizScreen
             step={step as keyof typeof QUESTIONS}
             progress={progress}
-            onAnswer={() => {
+            childName={displayName}
+            sectionLabel={SECTION_LABELS[step]}
+            sectionIntro={SECTION_INTROS[step]}
+            onAnswer={(idx) => {
+              setAnswers((prev) => ({ ...prev, [step]: idx }));
               const nextMap: Record<string, Step> = {
                 q1: "q2", q2: "q3", q3: "break1",
                 q4: "q5", q5: "q6", q6: "break2",
@@ -83,23 +125,23 @@ function Funnel() {
           <Break
             icon={<AlertTriangle className="h-14 w-14 text-destructive" />}
             badge="⚠️ ATENÇÃO"
-            title="O risco é mais real do que você imagina"
-            body="Milhares de crianças são expostas diariamente a golpes, cyberbullying, conteúdos inadequados e pessoas mal-intencionadas através da internet."
-            cta="CONTINUAR"
+            title={`Enquanto você responde isso, ${displayName} pode estar online agora`}
+            body="Milhares de crianças são expostas diariamente a golpes, cyberbullying, conteúdos inadequados e pessoas mal-intencionadas através da internet — muitas vezes sem que os pais percebam."
+            cta="VER MAIS"
             onContinue={() => setStep("q4")}
             tone="alert"
           />
         )}
 
-        {step === "break2" && <BreakShock onContinue={() => setStep("q7")} />}
+        {step === "break2" && <BreakShock childName={displayName} onContinue={() => setStep("q7")} />}
 
         {step === "break3" && (
           <Break
             icon={<Users className="h-14 w-14 text-neon" />}
             badge="VOCÊ NÃO ESTÁ SOZINHO"
             title="Milhares de pais já tomaram esta decisão"
-            body="Milhares de pais estão buscando maneiras de proteger seus filhos dos riscos digitais que aumentam todos os dias. A maioria só percebe o problema depois que algo acontece."
-            cta="CONTINUAR"
+            body="Milhares de pais estão buscando maneiras de proteger seus filhos dos riscos digitais que aumentam todos os dias. A maioria só percebe o problema depois que algo acontece. 'Eu não fazia ideia de quase nada disso até fazer esse teste' — relato comum entre os pais que chegam até aqui."
+            cta="VER RESULTADO"
             onContinue={() => setStep("loading")}
             tone="neon"
           />
@@ -107,11 +149,109 @@ function Funnel() {
 
         {step === "loading" && <LoadingResult onDone={() => setStep("result")} />}
 
-        {step === "result" && <Result onContinue={() => setStep("sales")} />}
+        {step === "result" && (
+          <Result
+            childName={displayName}
+            riskPct={riskPct}
+            riskLevel={riskLevel}
+            answers={answers}
+            onContinue={() => setStep("sales")}
+          />
+        )}
 
-        {step === "sales" && <Sales />}
+        {step === "sales" && <Sales childName={displayName} />}
       </div>
     </main>
+  );
+}
+
+/* ---------- NEWS (estilo portal) ---------- */
+function NewsIntro({ onContinue }: { onContinue: () => void }) {
+  return (
+    <section className="animate-fade-up">
+      <div className="flex items-center justify-between border-b border-border pb-3 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+        <span className="text-foreground">Portal Família & Tecnologia</span>
+        <span>Seção: Comportamento</span>
+      </div>
+
+      <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-destructive/40 bg-destructive/10 px-4 py-1.5 text-xs font-semibold tracking-wider text-destructive">
+        <span className="h-2 w-2 rounded-full bg-destructive animate-pulse-red" />
+        ALERTA AOS PAIS
+      </div>
+
+      <h1 className="mt-5 text-2xl font-bold leading-tight md:text-4xl">
+        Pesquisa revela: 72% das crianças acessam a internet sem qualquer supervisão dos pais
+      </h1>
+      <p className="mt-2 text-sm text-muted-foreground">Por Redação · Comportamento Digital · Atualizado hoje</p>
+
+      <div className="mt-6 space-y-4 text-base leading-relaxed text-muted-foreground md:text-lg">
+        <p>
+          Um levantamento nacional com mais de 2,4 mil crianças e adolescentes mostrou números que preocupam especialistas:
+          a maioria dos jovens passa horas online diariamente, muitas vezes sem que os responsáveis saibam exatamente o quê
+          estão acessando ou com quem estão conversando.
+        </p>
+        <p>
+          Entre os dados levantados, chama atenção o número de pais que <span className="font-semibold text-foreground">acreditam
+          que seus filhos estão seguros</span> — enquanto, na prática, mensagens de desconhecidos, conteúdos inadequados e
+          jogos com chats abertos fazem parte da rotina de boa parte dessas crianças.
+        </p>
+        <p>
+          Para especialistas em segurança digital infantil, o problema não é falta de cuidado dos pais — é falta de
+          informação sobre <span className="font-semibold text-foreground">onde estão os riscos reais</span> e como
+          identificá-los antes que se tornem um problema.
+        </p>
+        <p className="font-semibold text-foreground">
+          Diante desse cenário, foi desenvolvido um teste rápido — gratuito — para ajudar os pais a entenderem, em poucos
+          minutos, o nível de exposição digital dos próprios filhos.
+        </p>
+      </div>
+
+      <div className="mt-8 flex justify-center">
+        <button
+          onClick={onContinue}
+          className="group relative w-full max-w-md rounded-xl bg-gradient-to-r from-neon to-primary px-6 py-6 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.98] animate-pulse-glow md:px-8 md:py-5 md:text-lg"
+        >
+          FAZER O TESTE GRATUITO AGORA
+          <ChevronRight className="ml-2 inline h-5 w-5 transition-transform group-hover:translate-x-1" />
+        </button>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- NAME CAPTURE ---------- */
+function NameCapture({
+  value, onChange, onContinue,
+}: { value: string; onChange: (v: string) => void; onContinue: () => void }) {
+  return (
+    <section className="animate-fade-up text-center">
+      <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-2xl border border-neon/50 bg-card/60">
+        <Users className="h-10 w-10 text-neon" />
+      </div>
+      <h2 className="mt-6 text-2xl font-bold md:text-4xl">
+        Antes de começar, qual o nome do seu filho ou filha?
+      </h2>
+      <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
+        Vamos usar o nome para personalizar a análise e o resultado final.
+      </p>
+      <input
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder="Ex: João, Maria..."
+        className="mx-auto mt-6 block w-full max-w-sm rounded-xl border border-border bg-card/60 px-5 py-4 text-center text-lg text-foreground outline-none focus:border-neon"
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && value.trim()) onContinue();
+        }}
+      />
+      <button
+        onClick={onContinue}
+        disabled={!value.trim()}
+        className="group relative mt-6 w-full max-w-sm rounded-xl bg-gradient-to-r from-neon to-primary px-6 py-5 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.98] animate-pulse-glow disabled:opacity-40 md:text-base"
+      >
+        COMEÇAR ANÁLISE
+        <ChevronRight className="ml-2 inline h-5 w-5 transition-transform group-hover:translate-x-1" />
+      </button>
+    </section>
   );
 }
 
@@ -171,21 +311,32 @@ function Intro({ onStart }: { onStart: () => void }) {
 function QuizScreen({
   step,
   progress,
+  childName,
+  sectionLabel,
+  sectionIntro,
   onAnswer,
 }: {
   step: keyof typeof QUESTIONS;
   progress: number;
-  onAnswer: () => void;
+  childName: string;
+  sectionLabel?: string;
+  sectionIntro?: string;
+  onAnswer: (index: number) => void;
 }) {
   const q = QUESTIONS[step];
   return (
     <section className="animate-fade-up">
-      <ProgressBar value={progress} />
+      <ProgressBar value={progress} sectionLabel={sectionLabel} />
+      {sectionIntro && (
+        <p className="mt-4 rounded-xl border border-neon/30 bg-neon/5 px-4 py-3 text-sm italic text-muted-foreground animate-fade-up">
+          {sectionIntro}
+        </p>
+      )}
       <div className="mt-8 rounded-2xl border border-border bg-card/40 p-6 backdrop-blur md:p-10">
         <div className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-neon">
           <Eye className="h-4 w-4" /> Pergunta
         </div>
-        <h2 className="text-2xl font-bold leading-tight md:text-3xl">{q.title}</h2>
+        <h2 className="text-2xl font-bold leading-tight md:text-3xl">{q.title(childName)}</h2>
         <div className="mt-8 grid gap-3">
           {q.options.map((opt, i) => (
             <QuizOption key={opt} label={opt} index={i} onClick={onAnswer} />
@@ -233,7 +384,7 @@ function Break({
 }
 
 /* ---------- BREAK 2 - SHOCK ---------- */
-function BreakShock({ onContinue }: { onContinue: () => void }) {
+function BreakShock({ childName, onContinue }: { childName: string; onContinue: () => void }) {
   return (
     <section className="animate-fade-up -mx-5 rounded-3xl border border-destructive/40 bg-black/80 p-8 text-center backdrop-blur md:p-14">
       <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border-2 border-destructive bg-destructive/10 animate-pulse-red">
@@ -243,22 +394,22 @@ function BreakShock({ onContinue }: { onContinue: () => void }) {
         🚨 ATENÇÃO
       </h2>
       <p className="mx-auto mt-6 max-w-xl text-lg font-semibold text-foreground md:text-2xl">
-        Seu filho pode estar em perigo neste exato momento.
+        {childName} pode estar em perigo neste exato momento.
       </p>
       <div className="mx-auto mt-8 max-w-xl space-y-4 text-left text-base text-muted-foreground md:text-lg">
-        <p>Eu sei que você jamais gostaria de receber uma ligação da escola.</p>
-        <p>Ou descobrir tarde demais que seu filho foi vítima de cyberbullying.</p>
-        <p>Ou perceber que ele teve contato com pessoas perigosas online.</p>
+        <p>Eu sei que você jamais gostaria de receber uma ligação da escola sobre {childName}.</p>
+        <p>Ou descobrir tarde demais que {childName} foi vítima de cyberbullying.</p>
+        <p>Ou perceber que {childName} teve contato com pessoas perigosas online.</p>
         <p className="font-semibold text-foreground">Mas a verdade é simples:</p>
         <p className="border-l-2 border-neon pl-4 italic text-foreground">
-          A segurança digital do seu filho depende das decisões tomadas hoje.
+          A segurança digital de {childName} depende das decisões tomadas hoje.
         </p>
       </div>
       <button
         onClick={onContinue}
         className="mt-10 w-full max-w-sm rounded-xl bg-destructive px-6 py-5 text-sm font-bold uppercase tracking-wide text-destructive-foreground transition-transform hover:scale-[1.02] glow-red md:w-auto md:px-8 md:py-4 md:text-base"
       >
-        QUERO PROTEGER MEU FILHO
+        QUERO PROTEGER {childName.toUpperCase()}
       </button>
     </section>
   );
@@ -330,7 +481,32 @@ function LoadingResult({ onDone }: { onDone: () => void }) {
 }
 
 /* ---------- RESULT ---------- */
-function Result({ onContinue }: { onContinue: () => void }) {
+const FINDINGS: Record<string, (name: string) => string> = {
+  q1: (n) => `${n} costuma usar o celular sem supervisão direta.`,
+  q2: (n) => `Você não sabe com certeza com quem ${n} conversa online.`,
+  q3: (n) => `${n} possui múltiplas redes sociais ativas.`,
+  q4: (n) => `As configurações de privacidade dos apps de ${n} raramente são revisadas.`,
+  q5: (n) => `${n} já recebeu mensagens de pessoas desconhecidas.`,
+  q6: (n) => `Não há controle parental configurado na rotina de ${n}.`,
+};
+
+function Result({
+  childName, riskPct, riskLevel, answers, onContinue,
+}: {
+  childName: string;
+  riskPct: number;
+  riskLevel: "ALTO" | "MÉDIO" | "BAIXO";
+  answers: Record<string, number>;
+  onContinue: () => void;
+}) {
+  const findings = (["q1","q2","q3","q5","q6","q4"] as const)
+    .filter((k) => (QUESTIONS[k].risk[answers[k] ?? -1] ?? 0) >= 2)
+    .slice(0, 3)
+    .map((k) => FINDINGS[k](childName));
+
+  const levelColor = riskLevel === "ALTO" ? "text-destructive" : riskLevel === "MÉDIO" ? "text-yellow-500" : "text-green-500";
+  const barWidth = Math.max(15, riskPct);
+
   return (
     <section className="animate-fade-up">
       <div className="rounded-3xl border border-destructive/40 bg-card/60 p-8 backdrop-blur md:p-12">
@@ -338,34 +514,53 @@ function Result({ onContinue }: { onContinue: () => void }) {
           <ShieldAlert className="h-5 w-5" /> SUA ANÁLISE FOI CONCLUÍDA
         </div>
         <h2 className="mt-3 text-3xl font-bold md:text-4xl">
-          ⚠️ Sua Análise Foi Concluída...
+          ⚠️ A análise de {childName} foi concluída...
         </h2>
 
         <div className="mt-6 rounded-2xl border border-border bg-deep/60 p-6">
           <div className="mb-3 flex items-center justify-between text-sm">
-            <span className="font-medium text-muted-foreground">Nível de exposição</span>
-            <span className="font-bold text-destructive">ALTO</span>
+            <span className="font-medium text-muted-foreground">Nível de exposição de {childName}</span>
+            <span className={`font-bold ${levelColor}`}>{riskLevel}</span>
           </div>
           <div className="h-3 w-full overflow-hidden rounded-full bg-secondary">
-            <div className="h-full w-[78%] bg-gradient-to-r from-yellow-500 via-orange-500 to-destructive glow-red" />
+            <div className="h-full bg-gradient-to-r from-yellow-500 via-orange-500 to-destructive glow-red" style={{ width: `${barWidth}%` }} />
           </div>
         </div>
 
+        {findings.length > 0 && (
+          <div className="mt-6 space-y-2 rounded-2xl border border-destructive/30 bg-destructive/5 p-5">
+            <p className="text-sm font-bold uppercase tracking-wider text-destructive">Pontos identificados na sua resposta</p>
+            <ul className="space-y-2 text-base text-foreground">
+              {findings.map((f) => (
+                <li key={f} className="flex gap-2"><span>🚨</span><span>{f}</span></li>
+              ))}
+            </ul>
+          </div>
+        )}
+
         <div className="mt-6 space-y-4 text-lg text-muted-foreground">
-          <p>Com base nas suas respostas, identificamos alguns sinais que merecem atenção.</p>
-          <p>Isso não significa que seu filho esteja correndo perigo neste momento.</p>
-          <p>Mas significa que existem riscos digitais que podem passar despercebidos pela maioria dos pais.</p>
+          <p>Com base nas suas respostas, identificamos sinais que merecem atenção na rotina digital de {childName}.</p>
+          <p>Isso não significa que {childName} esteja correndo perigo neste momento.</p>
+          <p>Mas significa que existem riscos que podem passar despercebidos pela maioria dos pais.</p>
           <p className="font-semibold text-foreground">E é exatamente assim que muitos problemas começam.</p>
           <p>Primeiro vem a sensação de segurança.</p>
           <p>Depois vem a surpresa.</p>
           <p className="font-semibold text-destructive">E quando os pais descobrem o que aconteceu, geralmente já é tarde demais.</p>
         </div>
 
+        <div className="mt-6 flex items-start gap-3 rounded-2xl border border-neon/30 bg-neon/5 p-5">
+          <span className="text-2xl">🎁</span>
+          <p className="text-sm text-foreground md:text-base">
+            Como agradecimento por completar a análise, preparamos um material gratuito com as primeiras ações que você
+            pode tomar hoje para proteger {childName} — disponível na próxima tela, junto com o guia completo.
+          </p>
+        </div>
+
         <button
           onClick={onContinue}
           className="mt-8 w-full rounded-xl bg-gradient-to-r from-neon to-primary px-8 py-5 text-lg font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:scale-[1.01] animate-pulse-glow"
         >
-          🛡️ QUERO PROTEGER MEU FILHO AGORA <ChevronRight className="ml-1 inline h-5 w-5" />
+          🛡️ QUERO PROTEGER {childName.toUpperCase()} AGORA <ChevronRight className="ml-1 inline h-5 w-5" />
         </button>
       </div>
     </section>
@@ -373,7 +568,7 @@ function Result({ onContinue }: { onContinue: () => void }) {
 }
 
 /* ---------- SALES ---------- */
-function Sales() {
+function Sales({ childName }: { childName: string }) {
   const risks = [
     "🚨 Perfis falsos",
     "🚨 Conversas aparentemente inocentes",
@@ -467,7 +662,7 @@ function Sales() {
         <p className="text-foreground">Se você chegou até aqui...</p>
         <p>Provavelmente existe uma preocupação que passa pela sua cabeça de vez em quando.</p>
         <p className="rounded-2xl border border-neon/40 bg-neon/10 p-5 text-center font-semibold text-foreground glow-blue">
-          “Será que meu filho está realmente seguro quando está online?”
+          “Será que {childName} está realmente seguro(a) quando está online?”
         </p>
         <p>A verdade é que nenhuma mãe ou pai consegue vigiar uma tela 24 horas por dia.</p>
         <p>E não é por falta de cuidado.</p>
@@ -477,7 +672,7 @@ function Sales() {
           <p className="rounded-xl border border-border bg-card/50 p-4">Enquanto está preparando o jantar...</p>
           <p className="rounded-xl border border-border bg-card/50 p-4">Enquanto está dormindo...</p>
         </div>
-        <p className="font-semibold text-destructive">Seu filho pode estar navegando por ambientes que você nem imagina.</p>
+        <p className="font-semibold text-destructive">{childName} pode estar navegando por ambientes que você nem imagina.</p>
       </section>
 
       <section className="mt-16 rounded-3xl border border-destructive/40 bg-card/60 p-6 backdrop-blur md:p-10">
@@ -516,11 +711,11 @@ function Sales() {
         <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border-2 border-destructive bg-destructive/10 animate-pulse-red">
           <AlertTriangle className="h-10 w-10 text-destructive" />
         </div>
-        <h2 className="mt-6 text-2xl font-black leading-tight text-destructive text-glow-red md:text-5xl">Imagine receber uma ligação da escola...</h2>
+        <h2 className="mt-6 text-2xl font-black leading-tight text-destructive text-glow-red md:text-5xl">Imagine receber uma ligação da escola sobre {childName}...</h2>
         <div className="mx-auto mt-7 max-w-2xl space-y-4 text-base text-muted-foreground md:text-xl">
-          <p>Seu filho sofreu cyberbullying.</p>
-          <p>Ou descobrir que ele passou meses conversando com alguém que fingia ser outra criança.</p>
-          <p>Ou perceber que conteúdos impróprios influenciaram comportamentos que você não consegue entender.</p>
+          <p>{childName} sofreu cyberbullying.</p>
+          <p>Ou você descobre que {childName} passou meses conversando com alguém que fingia ser outra criança.</p>
+          <p>Ou percebe que conteúdos impróprios influenciaram comportamentos de {childName} que você não consegue entender.</p>
           <p className="font-bold text-foreground">Nenhum pai acredita que isso vai acontecer com sua família.</p>
           <p className="font-bold text-destructive">Até acontecer.</p>
         </div>
