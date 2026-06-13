@@ -6,12 +6,12 @@ export function QuizOption({
   index,
 }: {
   label: string;
-  onClick: () => void;
+  onClick: (index: number) => void;
   index: number;
 }) {
   return (
     <button
-      onClick={onClick}
+      onClick={() => onClick(index)}
       className={cn(
         "group w-full text-left rounded-xl border border-border bg-card/60 backdrop-blur",
         "px-5 py-5 text-base md:text-lg font-medium text-foreground min-h-[56px]",
